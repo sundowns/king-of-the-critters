@@ -10,6 +10,7 @@ enum PlayerState {
 }
 
 const critter_scene_path_format = "res://{str}.tscn"
+const sprite_walk_rotation = 4
 
 var velocity = Vector2.ZERO
 var state = PlayerState.CROWN
@@ -53,9 +54,9 @@ func move_controlled_state(delta, input_vector):
 
 func rotate_critter_sprite(critter_sprite, input_vector):
 	if input_vector.x > 0:
-		critter_sprite.rotation_degrees = 4
+		critter_sprite.rotation_degrees = sprite_walk_rotation
 	elif input_vector.x < 0:
-		critter_sprite.rotation_degrees = -4
+		critter_sprite.rotation_degrees = -sprite_walk_rotation
 	else:
 		critter_sprite.rotation_degrees = 0
 

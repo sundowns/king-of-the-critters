@@ -1,31 +1,30 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://CritterSprite.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Controllable.gd" type="Script" id=3]
+[ext_resource path="res://Controllable.gd" type="Script" id=2]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.94552
-height = 4.19052
+radius = 4.77466
+height = 3.98065
 
-[node name="Crocodile" type="KinematicBody2D"]
+[node name="Cat" type="KinematicBody2D"]
 collision_layer = 4
-script = ExtResource( 3 )
-Name = "Crocodile"
+script = ExtResource( 2 )
+Name = "Cat"
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
-scale = Vector2( 1.3, 1.3 )
-frame = 413
+frame = 366
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
 visible = false
-position = Vector2( 0, -3 )
+position = Vector2( 0.5, -8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+visible = false
 shape = SubResource( 1 )
 
-[node name="Stats" parent="." instance=ExtResource( 2 )]
-max_health = 5
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+max_health = 2
 
 [editable path="CritterSprite"]

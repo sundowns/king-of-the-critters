@@ -1,11 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://CritterSprite.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Controllable.gd" type="Script" id=2]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 5.55798
-height = 4.0765
+radius = 4.49767
+height = 2.27091
+
+[sub_resource type="Animation" id=2]
+resource_name = "Attack"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CritterSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -2.0, 2.0, -2.0, 2.0 ]
+}
 
 [node name="Rat" type="KinematicBody2D"]
 collision_layer = 2147483652
@@ -13,14 +31,19 @@ script = ExtResource( 2 )
 Name = "Rat"
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 0.7, 0.7 )
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
 visible = false
 position = Vector2( 4, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 2 )
 
 [editable path="CritterSprite"]

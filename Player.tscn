@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://art/Tilesheet/colored_transparent.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.58996
@@ -61,8 +62,7 @@ shape = SubResource( 1 )
 
 [node name="Crown" type="Sprite" parent="."]
 position = Vector2( 0, -20 )
-texture = ExtResource( 1 )
-offset = Vector2( 0, 1 )
+texture = ExtResource( 3 )
 vframes = 22
 hframes = 48
 frame = 139
@@ -71,7 +71,7 @@ frame = 139
 modulate = Color( 0.196078, 0.196078, 0.196078, 0.588235 )
 self_modulate = Color( 0.839216, 0.839216, 0.839216, 1 )
 position = Vector2( 0, 15 )
-scale = Vector2( 0.975, 0.575 )
+scale = Vector2( 1, 0.6 )
 texture = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
