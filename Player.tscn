@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://art/Tilesheet/colored_transparent.png" type="Texture" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 7.58996
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.78669
+height = 7.8785
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 664, 222, 14, 14 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Move"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Crown:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.6 ), Vector2( 0.975, 0.575 ), Vector2( 0.925, 0.55 ), Vector2( 0.975, 0.575 ) ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, 5 )
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="CritterDetectionZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CritterDetectionZone"]
+modulate = Color( 0.207843, 0.52549, 0.0745098, 0.733333 )
+self_modulate = Color( 1, 1, 1, 0.388235 )
+show_behind_parent = true
+position = Vector2( 0, -5 )
+shape = SubResource( 4 )
+
+[node name="Crown" type="Sprite" parent="."]
+position = Vector2( 0, -20 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 1 )
+vframes = 22
+hframes = 48
+frame = 139
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -8.0534 )
+shape = SubResource( 1 )
+
+[node name="Shadow" type="Sprite" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 0.588235 )
+self_modulate = Color( 0.839216, 0.839216, 0.839216, 1 )
+position = Vector2( 0, -5 )
+scale = Vector2( 0.975, 0.575 )
+texture = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Move"
+anims/Move = SubResource( 3 )
+[connection signal="body_entered" from="CritterDetectionZone" to="." method="_on_CritterDetectionZone_body_entered"]
+[connection signal="body_exited" from="CritterDetectionZone" to="." method="_on_CritterDetectionZone_body_exited"]
