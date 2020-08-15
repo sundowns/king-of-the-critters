@@ -16,6 +16,7 @@ Name = "Crocodile"
 frame = 413
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
+visible = false
 position = Vector2( 0, -3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

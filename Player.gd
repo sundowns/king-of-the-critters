@@ -20,6 +20,8 @@ onready var animation_player = $AnimationPlayer
 onready var crown_sprite = $Crown
 onready var collision_shape = $CollisionShape2D
 
+onready var critter_detection_zone_collision = $CritterDetectionZone/CollisionShape2D
+
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -31,6 +33,7 @@ func _physics_process(delta):
 			move_crown_state(delta, input_vector)
 		PlayerState.CONTROLLING:
 			move_controlled_state(delta, input_vector)
+			
 
 func move_crown_state(delta, input_vector):
 	crown_sprite.visible = true
@@ -40,12 +43,22 @@ func move_crown_state(delta, input_vector):
 	check_target()
 
 func move_controlled_state(delta, input_vector):
-	get_node("CritterSprite").visible = true
+	var critter_sprite = get_node("CritterSprite")
+	critter_sprite.visible = true
 	player_movement(delta, input_vector)
 	move()
+	rotate_critter_sprite(critter_sprite, input_vector)
 	if Input.is_action_just_pressed("ui_accept"):
 		release_target()
-	
+
+func rotate_critter_sprite(critter_sprite, input_vector):
+	if input_vector.x > 0:
+		critter_sprite.rotation_degrees = 4
+	elif input_vector.x < 0:
+		critter_sprite.rotation_degrees = -4
+	else:
+		critter_sprite.rotation_degrees = 0
+
 func player_movement(delta, input_vector):
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
@@ -57,7 +70,6 @@ func move():
 
 func check_target():
 	if control_target:
-		control_target.set_is_targetted(true)
 		if Input.is_action_just_pressed("ui_accept"):
 			assume_control_of_target()
 
@@ -72,13 +84,15 @@ func assume_control_of_target():
 	collision_shape.disabled = false
 	current_critter_type = control_target.name
 	control_target.player_assumed_control()
+	control_target = null
+	critter_detection_zone_collision.disabled = true
 	state = PlayerState.CONTROLLING
 
 func release_target():
 	crown_sprite.visible = false
 	collision_shape.disabled = true
 	get_node("CritterSprite").queue_free()
-	control_target = null
+	critter_detection_zone_collision.disabled = false
 	
 	# Probably a much better way to do this but idk
 	var new_critter = load(critter_scene_path_format.format({"str": current_critter_type})).instance()
@@ -86,9 +100,14 @@ func release_target():
 	get_parent().add_child(new_critter)
 	state = PlayerState.CROWN
 
+# TODO: instead of using signals, can we just actively scan for current collisions with detection zone?
 func _on_CritterDetectionZone_body_entered(body):
+	if control_target:
+		control_target.set_is_targetted(false)
+	body.set_is_targetted(true)
 	control_target = body
 
 func _on_CritterDetectionZone_body_exited(body):
-	control_target.set_is_targetted(false)
-	control_target = null
+	if control_target == body:
+		body.set_is_targetted(false)
+		control_target = null
