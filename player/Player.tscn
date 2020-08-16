@@ -13,7 +13,7 @@ region = Rect2( 664, 222, 14, 14 )
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 4.39274
-height = 3.49829
+height = 0.835965
 
 [sub_resource type="Animation" id=4]
 loop = true
