@@ -32,6 +32,7 @@ shape = SubResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 max_health = 2
+nav_alias = "Cat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
 speed = 20.0

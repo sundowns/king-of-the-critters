@@ -15,3 +15,8 @@
 - Recolour critter sprites
 - Cheeeeeeeeeeeeeeeese? (does nothing yet :D)
 - ~1 hour
+
+- Simple navigation to goals
+- Rats to cheese, Cats to rats, Crocs to cats
+- Walk animation, attack animation
+- ~4 hours

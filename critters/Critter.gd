@@ -21,7 +21,7 @@ var outlined = false
 func _ready():
 	crown_sprite.visible = false
 	if navigation:
-		navigation.goal_node = goal_node
+		navigation.goal_node_name = goal_node
 
 func _process(delta):
 	if outlined:

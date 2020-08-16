@@ -20,18 +20,21 @@ critter_name = "Rat"
 goal_node = "Cheese"
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
-rotation = 0.0349066
+rotation = -0.0349066
 scale = Vector2( 0.7, 0.7 )
+offset = Vector2( -1, -2 )
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
 visible = false
 position = Vector2( 4, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
+nav_alias = "Rat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
 speed = 10.0
