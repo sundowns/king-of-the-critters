@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://CritterSprite.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Controllable.gd" type="Script" id=2]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://critters/CritterSprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://critters/Controllable.gd" type="Script" id=2]
+[ext_resource path="res://critters/Stats.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.77466
@@ -21,7 +21,6 @@ visible = false
 position = Vector2( 0.5, -8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]

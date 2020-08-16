@@ -9,7 +9,7 @@ enum PlayerState {
 	CONTROLLING
 }
 
-const critter_scene_path_format = "res://{str}.tscn"
+const critter_scene_path_format = "res://critters/{str}.tscn"
 const sprite_walk_rotation = 4
 
 var velocity = Vector2.ZERO
@@ -80,6 +80,8 @@ func detect_critters():
 			closest_body = body
 	if closest_body:
 		update_control_target(closest_body)
+	elif control_target:
+		reset_control_target()
 	if control_target:
 		if Input.is_action_just_pressed("ui_accept"):
 			assume_control_of_target()
@@ -94,6 +96,7 @@ func assume_control_of_target():
 	
 	collision_shape.disabled = false
 	current_critter_type = control_target.name
+	global_position = control_target.global_position
 	control_target.player_assumed_control()
 	control_target = null
 	critter_detection_zone_collision.disabled = true
@@ -113,18 +116,10 @@ func release_target():
 
 func update_control_target(new_target):
 	if control_target:
-		control_target.set_is_targetted(false)
+		reset_control_target()
 	control_target = new_target
 	new_target.set_is_targetted(true)
 
-## TODO: instead of using signals, can we just actively scan for current collisions with detection zone?
-#func _on_CritterDetectionZone_body_entered(body):
-#	if control_target:
-#		control_target.set_is_targetted(false)
-#	body.set_is_targetted(true)
-#	control_target = body
-#
-#func _on_CritterDetectionZone_body_exited(body):
-#	if control_target == body:
-#		body.set_is_targetted(false)
-#		control_target = null
+func reset_control_target():
+	control_target.set_is_targetted(false)
+	control_target = null
