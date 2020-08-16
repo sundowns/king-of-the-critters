@@ -5,7 +5,7 @@
 [ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 7.58996
+radius = 6.58199
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -58,6 +58,7 @@ modulate = Color( 0.207843, 0.52549, 0.0745098, 0.733333 )
 self_modulate = Color( 1, 1, 1, 0.388235 )
 show_behind_parent = true
 position = Vector2( 0, -5 )
+scale = Vector2( 1, 0.8 )
 shape = SubResource( 1 )
 
 [node name="Crown" type="Sprite" parent="."]
@@ -82,5 +83,3 @@ disabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Move"
 anims/Move = SubResource( 4 )
-[connection signal="body_entered" from="CritterDetectionZone" to="." method="_on_CritterDetectionZone_body_entered"]
-[connection signal="body_exited" from="CritterDetectionZone" to="." method="_on_CritterDetectionZone_body_exited"]

@@ -21,6 +21,7 @@ onready var animation_player = $AnimationPlayer
 onready var crown_sprite = $Crown
 onready var collision_shape = $CollisionShape2D
 
+onready var critter_detection_zone = $CritterDetectionZone
 onready var critter_detection_zone_collision = $CritterDetectionZone/CollisionShape2D
 
 func _physics_process(delta):
@@ -41,7 +42,7 @@ func move_crown_state(delta, input_vector):
 	animation_player.play("Move")
 	player_movement(delta, input_vector)
 	move()
-	check_target()
+	detect_critters()
 
 func move_controlled_state(delta, input_vector):
 	var critter_sprite = get_node("CritterSprite")
@@ -69,7 +70,16 @@ func player_movement(delta, input_vector):
 func move():
 	velocity = move_and_slide(velocity)
 
-func check_target():
+func detect_critters():
+	var closest_body = null
+	for body in critter_detection_zone.get_overlapping_bodies():
+		if not closest_body:
+			closest_body = body
+		elif body.global_position.distance_to(critter_detection_zone.global_position) < closest_body.global_position.distance_to(critter_detection_zone.global_position):
+			# compare their distance and keep the closer one
+			closest_body = body
+	if closest_body:
+		update_control_target(closest_body)
 	if control_target:
 		if Input.is_action_just_pressed("ui_accept"):
 			assume_control_of_target()
@@ -101,14 +111,20 @@ func release_target():
 	get_parent().add_child(new_critter)
 	state = PlayerState.CROWN
 
-# TODO: instead of using signals, can we just actively scan for current collisions with detection zone?
-func _on_CritterDetectionZone_body_entered(body):
+func update_control_target(new_target):
 	if control_target:
 		control_target.set_is_targetted(false)
-	body.set_is_targetted(true)
-	control_target = body
+	control_target = new_target
+	new_target.set_is_targetted(true)
 
-func _on_CritterDetectionZone_body_exited(body):
-	if control_target == body:
-		body.set_is_targetted(false)
-		control_target = null
+## TODO: instead of using signals, can we just actively scan for current collisions with detection zone?
+#func _on_CritterDetectionZone_body_entered(body):
+#	if control_target:
+#		control_target.set_is_targetted(false)
+#	body.set_is_targetted(true)
+#	control_target = body
+#
+#func _on_CritterDetectionZone_body_exited(body):
+#	if control_target == body:
+#		body.set_is_targetted(false)
+#		control_target = null
