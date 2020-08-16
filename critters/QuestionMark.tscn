@@ -5,7 +5,6 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Alert"
-length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath("AnimationPlayer")
 tracks/0/interp = 1
@@ -13,7 +12,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 2 ),
+"times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -27,17 +26,17 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.0451555, 0, 0, 0, -50, -0.859278, -0.0120437, -28.0956, 0, 10.5107, -0.457401, -0.0838917, 60.0477, 0.0456369, -49.0291, -0.0555232, 0, 0, 0.00808695, 26.5239, 0.274724, -0.0196967, 29.2861, 0.0204171, -22.8354, 0.346355, -0.0212962, -25.8178, 0.0564194, 39.6882, -0.0555227, 0, 0, 0.00106809, 24.5145 ),
+"points": PoolRealArray( 0.0451555, 0, 0, 0, -50, -0.859278, 0, 4.0475, 0, 10.5107, -0.457401, -0.0838917, 60.0477, 0.0456369, -49.0291, -0.0555232, 0, 0, 0.00808695, 26.5239, 0.274724, -0.0196967, 29.2861, 0.0204171, -22.8354, 0.346355, -0.0212962, -25.8178, 0.0564194, 39.6882, -0.0555227, 0, 0, 0.00106809, 24.5145 ),
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.43, 0.57, 0.75 )
 }
 
 [node name="Alert" type="Sprite"]
-rotation = -0.000969054
+rotation = -0.0149972
 texture = ExtResource( 1 )
 offset = Vector2( 0, -14 )
 vframes = 22
 hframes = 48
-frame = 660
+frame = 662
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Alert"

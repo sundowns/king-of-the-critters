@@ -26,6 +26,7 @@ frame = 366
 position = Vector2( 0.5, -8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -0.297638, 0 )
 shape = SubResource( 1 )
 

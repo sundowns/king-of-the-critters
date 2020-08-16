@@ -1,8 +1,9 @@
-extends Node
+extends Area2D
 
 onready var parent: Node2D = get_parent()
 onready var nav_map: Navigation2D = get_tree().current_scene.get_node("NavigationMap")
 onready var hitbox: CollisionShape2D = get_parent().get_node("CollisionShape2D")
+
 
 export var speed: float = 1
 export var hitbox_leniancy = 3
@@ -52,14 +53,16 @@ func set_path_to_target():
 func _on_Navigation_body_entered(body: Node):
 	if not is_goal_node(body):
 		return
+	var updated = false
 	if not current_target:
 		current_target = body
+		parent.state = 'CHASE'
 	if current_target and current_target.get_instance_id() != body.get_instance_id():
 		# check which is closer and use that one
 		if body.global_position.distance_to(parent.global_position) < current_target.global_position.distance_to(parent.global_position):
 			current_target = body
-	parent.state = 'WANDER'
-	set_path(nav_map.get_simple_path(parent.global_position, current_target.global_position))
+			parent.state = 'CHASE'
+	set_path_to_target()
 
 func _on_Navigation_body_exited(body: Node):
 	if not current_target:
@@ -69,6 +72,11 @@ func _on_Navigation_body_exited(body: Node):
 	if body.get_instance_id() == current_target.get_instance_id():
 		current_target = null
 		path = PoolVector2Array()
+		for body in get_overlapping_bodies():
+			if is_goal_node(body) and body != current_target:
+				current_target = body
+				parent.state = 'CHASE'
+				return
 		parent.state = 'IDLE'
 
 func is_goal_node(body):
