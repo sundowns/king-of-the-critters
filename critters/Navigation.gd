@@ -8,7 +8,7 @@ export var speed: float = 1
 export var hitbox_leniancy = 3
 
 var current_target: Node = null
-var goal_node_name: String setget set_goal_node # Provided by parent
+var goal_node_names: Array setget set_goal_node # Provided by parent
 var path := PoolVector2Array() setget set_path
 
 func _ready():
@@ -20,7 +20,7 @@ func _process(delta):
 	move_along_path(speed, delta)
 	
 func set_goal_node(new_goal_name):
-	goal_node_name = new_goal_name
+	goal_node_names = new_goal_name
 
 func move_along_path(speed: float, delta: float):
 	var distance = speed * delta # used for estimating distance to point
@@ -55,9 +55,9 @@ func _on_Navigation_body_entered(body: Node):
 	if not current_target:
 		current_target = body
 	if current_target and current_target.get_instance_id() != body.get_instance_id():
+		# check which is closer and use that one
 		if body.global_position.distance_to(parent.global_position) < current_target.global_position.distance_to(parent.global_position):
 			current_target = body
-		# check which is closer and use that one
 	parent.state = 'WANDER'
 	set_path(nav_map.get_simple_path(parent.global_position, current_target.global_position))
 
@@ -75,4 +75,4 @@ func is_goal_node(body):
 	if not body.has_node('Stats'):
 		return false
 	var stats = body.get_node('Stats')
-	return stats.nav_alias == goal_node_name
+	return goal_node_names.has(stats.nav_alias)

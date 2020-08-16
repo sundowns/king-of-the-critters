@@ -17,7 +17,7 @@ collision_layer = 2147483652
 collision_mask = 21
 script = ExtResource( 2 )
 critter_name = "Rat"
-goal_node = "Cheese"
+goal_nodes = [ "Cheese" ]
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
 rotation = -0.0349066
@@ -25,7 +25,6 @@ scale = Vector2( 0.7, 0.7 )
 offset = Vector2( -1, -2 )
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
-visible = false
 position = Vector2( 4, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

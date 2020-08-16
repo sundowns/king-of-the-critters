@@ -87,6 +87,7 @@ hframes = 48
 frame = 415
 
 [node name="CritterCrown" type="Sprite" parent="."]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 vframes = 22

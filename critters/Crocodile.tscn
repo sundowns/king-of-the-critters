@@ -10,21 +10,20 @@ radius = 8.91867
 height = 2.87302
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 50.0
+radius = 70.0
 
 [node name="Crocodile" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 13
 script = ExtResource( 3 )
 critter_name = "Crocodile"
-goal_node = "Cat"
+goal_nodes = [ "Cat", "Meat" ]
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 1.2, 1.2 )
 frame = 413
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
-visible = false
 position = Vector2( 0, -3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -38,6 +37,7 @@ nav_alias = "Crocodile"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
 speed = 10.0
+hitbox_leniancy = 4
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
 shape = SubResource( 2 )

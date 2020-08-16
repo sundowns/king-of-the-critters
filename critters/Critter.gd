@@ -7,7 +7,7 @@ onready var shader_material = sprite.material
 onready var navigation = $Navigation
 
 export var critter_name: String
-export var goal_node: String
+export(Array) var goal_nodes: Array
 
 enum CritterState {
 	IDLE,
@@ -21,7 +21,7 @@ var outlined = false
 func _ready():
 	crown_sprite.visible = false
 	if navigation:
-		navigation.goal_node_name = goal_node
+		navigation.goal_node_names = goal_nodes
 
 func _process(delta):
 	if outlined:

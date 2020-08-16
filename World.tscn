@@ -654,13 +654,13 @@ position = Vector2( 158.684, 53.8365 )
 position = Vector2( 104.474, 156.785 )
 
 [node name="Crocodile" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 276.186, 35.3744 )
+position = Vector2( 218.51, 113.267 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 99.8814, 69.4745 )
 
 [node name="Meat" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 223.158, 57.9417 )
+position = Vector2( 184.806, 92.1314 )
 
 [node name="Cheese" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 265.309, 140.433 )
