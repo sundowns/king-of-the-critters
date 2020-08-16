@@ -19,4 +19,5 @@
 - Simple navigation to goals
 - Rats to cheese, Cats to rats, Crocs to cats
 - Walk animation, attack animation
-- ~4 hours
+- Navigation picks the closest goal
+- ~5 hours
