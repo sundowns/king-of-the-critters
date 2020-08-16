@@ -20,4 +20,5 @@
 - Rats to cheese, Cats to rats, Crocs to cats
 - Walk animation, attack animation
 - Navigation picks the closest goal
-- ~5 hours
+- Overhead alert effect
+- ~7 hours
