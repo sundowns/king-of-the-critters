@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+export var KNOCKBACK_FRICTION = 150
+export var KNOCKBACK_FORCE: int = 80
+export var ANIMATION_NAME = "Rat"
+export(Array) var goal_nodes: Array
+
 onready var sprite = $CritterSprite
 onready var crown_sprite = $CritterSprite/CritterCrown
 onready var animation_player = $CritterSprite/AnimationPlayer
@@ -7,14 +12,9 @@ onready var shader_material = sprite.material
 onready var navigation = $Navigation
 onready var stats = $Stats
 onready var critter_attack = $CritterAttack
-
-const alert_scene = preload("res://critters/Alert.tscn")
-const question_mark_scene = preload("res://critters/QuestionMark.tscn")
-
-export var KNOCKBACK_FRICTION = 150
-export var KNOCKBACK_FORCE: int = 80
-export var critter_name: String
-export(Array) var goal_nodes: Array
+onready var hit_effect_scene = preload("res://effects/RatHitEffect.tscn") #TODO: other hit effects
+const alert_scene = preload("res://effects/Alert.tscn")
+const question_mark_scene = preload("res://effects/QuestionMark.tscn")
 
 enum CritterState {
 	IDLE,
@@ -74,8 +74,8 @@ func set_state(new_state):
 	state = CritterState[new_state]
 	if state == CritterState.CHASE:
 		create_alert()
-	elif state == CritterState.IDLE:
-		create_question_mark() # TODO: probably not sufficient once we have eating/destroying target
+	elif state == CritterState.IDLE: # TODO: probably not sufficient (seems to be getting immediately interupted)
+		create_question_mark() 
 
 func create_question_mark():
 	clear_alerts()
@@ -88,6 +88,11 @@ func create_alert():
 	var alert = alert_scene.instance()
 	alert.global_position = get_parent().global_position
 	add_child(alert, true)
+	
+func create_hit_effect(target: Node2D):
+	var hit_effect = hit_effect_scene.instance()
+	add_child(hit_effect)
+	hit_effect.global_position = hit_effect.global_position.move_toward(target.global_position, hit_effect.global_position.distance_to(target.global_position) * 0.75)
 
 func clear_alerts():
 	var node = find_node("Alert*", true, false)
@@ -116,6 +121,8 @@ func _on_CritterAttack_area_entered(area):
 		hunt_new_target(area.get_parent())
 
 func _on_CritterSprite_attack_animation_ended():
+	create_hit_effect(attack_target)
+	
 	# TODO: maaaaybe play our attack here instead so we can pick based on attacker
 	var knockback_vector = global_position.direction_to(attack_target.global_position)
 	attack_target.on_hit(critter_attack.damage, knockback_vector * KNOCKBACK_FORCE)

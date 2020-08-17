@@ -15,7 +15,7 @@ height = 0.0
 radius = 125.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 6.56166
+radius = 7.12133
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 5.99687
@@ -28,7 +28,6 @@ __meta__ = {
 "_edit_group_": true
 }
 KNOCKBACK_FORCE = 60
-critter_name = "Rat"
 goal_nodes = [ "Cheese" ]
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]

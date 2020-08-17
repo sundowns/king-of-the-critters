@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://art/Tilesheet/colored_transparent.png" type="Texture" id=1]
-[ext_resource path="res://critters/Alert.gd" type="Script" id=2]
+[ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=1]
+[ext_resource path="res://effects/Alert.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Alert"
@@ -32,7 +32,7 @@ tracks/1/keys = {
 }
 
 [node name="Alert" type="Sprite"]
-rotation = -0.000969054
+rotation = 0.000788112
 texture = ExtResource( 1 )
 offset = Vector2( 0, -14 )
 vframes = 22

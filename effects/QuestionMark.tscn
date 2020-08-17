@@ -1,7 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://art/Tilesheet/colored_transparent.png" type="Texture" id=1]
-[ext_resource path="res://critters/Alert.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Alert"
@@ -30,6 +29,19 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.43, 0.57, 0.75 )
 }
 
+[sub_resource type="GDScript" id=2]
+script/source = "extends AnimationPlayer
+
+export var animation_name = \"Alert\"
+
+func _ready():
+	connect(\"animation_finished\", self, \"_on_animation_finished\")
+	play(animation_name)
+
+func _on_animation_finished():
+	get_parent().queue_free()
+"
+
 [node name="Alert" type="Sprite"]
 rotation = 0.000788112
 texture = ExtResource( 1 )
@@ -41,4 +53,4 @@ frame = 662
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Alert"
 anims/Alert = SubResource( 1 )
-script = ExtResource( 2 )
+script = SubResource( 2 )
