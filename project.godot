@@ -88,7 +88,12 @@ ui_down={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Critter"
 2d_physics/layer_4="Item"
-2d_physics/layer_5="CritterHurtbox"
+2d_physics/layer_5="Hurtbox"
+2d_physics/layer_11="Crocodile"
+2d_physics/layer_12="Cat"
+2d_physics/layer_13="Rat"
+2d_physics/layer_14="Meat"
+2d_physics/layer_15="Cheese"
 
 [rendering]
 

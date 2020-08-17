@@ -1,46 +1,79 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://critters/CritterSprite.tscn" type="PackedScene" id=1]
 [ext_resource path="res://critters/Critter.gd" type="Script" id=2]
 [ext_resource path="res://critters/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://critters/Navigation.tscn" type="PackedScene" id=4]
+[ext_resource path="res://critters/Hurtbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://critters/CritterAttack.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.68467
-height = 0.326993
+radius = 2.80048
+height = 2.08513
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 125.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 7.49565
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 5.99687
 
 [node name="Rat" type="KinematicBody2D"]
 collision_layer = 2147483652
 collision_mask = 13
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 critter_name = "Rat"
 goal_nodes = [ "Cheese" ]
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
-rotation = 0.0349066
 scale = Vector2( 0.7, 0.7 )
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
 position = Vector2( 4, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
+max_health = 2
 nav_alias = "Rat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
-speed = 10.0
+visible = false
+speed = 12.0
 hitbox_leniancy = 2
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
 shape = SubResource( 2 )
 
+[node name="CritterAttack" parent="." instance=ExtResource( 6 )]
+visible = false
+collision_mask = 16384
+
+[node name="CollisionShape2D" parent="CritterAttack" index="0"]
+shape = SubResource( 3 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+visible = false
+collision_layer = 4096
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 4 )
+[connection signal="attack_animation_ended" from="CritterSprite" to="." method="_on_CritterSprite_attack_animation_ended"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="CritterAttack" to="." method="_on_CritterAttack_area_entered"]
+[connection signal="attack" from="CritterAttack" to="." method="_on_CritterAttack_attack"]
+
 [editable path="CritterSprite"]
 
 [editable path="Navigation"]
+
+[editable path="CritterAttack"]
+
+[editable path="Hurtbox"]
