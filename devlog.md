@@ -22,3 +22,10 @@
 - Navigation picks the closest goal
 - Overhead alert effect
 - ~7 hours
+
+## Day 3
+
+- Critters attack state/animation
+- Damage/health
+- Hit effect
+- ~4 hours
