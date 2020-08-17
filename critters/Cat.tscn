@@ -27,6 +27,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+KNOCKBACK_FORCE = 90
 critter_name = "Cat"
 goal_nodes = [ "Rat" ]
 
@@ -65,7 +66,6 @@ shape = SubResource( 3 )
 [connection signal="attack_animation_ended" from="CritterSprite" to="." method="_on_CritterSprite_attack_animation_ended"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="CritterAttack" to="." method="_on_CritterAttack_area_entered"]
-[connection signal="attack" from="CritterAttack" to="." method="_on_CritterAttack_attack"]
 
 [editable path="CritterSprite"]
 

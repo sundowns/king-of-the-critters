@@ -10,13 +10,14 @@ radius = 3.16607
 height = 5.45664
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 4.45574
-height = 6.44855
+radius = 3.86047
+height = 5.25801
 
-[node name="Cheese" type="StaticBody2D"]
+[node name="Cheese" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 5
 script = ExtResource( 3 )
+KNOCKBACK_FRICTION = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -30,6 +31,7 @@ hframes = 48
 frame = 802
 
 [node name="Stats" parent="." instance=ExtResource( 2 )]
+max_health = 2
 nav_alias = "Cheese"
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]

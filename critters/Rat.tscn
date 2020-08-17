@@ -8,14 +8,14 @@
 [ext_resource path="res://critters/CritterAttack.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 2.80048
-height = 2.08513
+radius = 2.23861
+height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 125.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 7.49565
+radius = 6.56166
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 5.99687
@@ -27,6 +27,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+KNOCKBACK_FORCE = 60
 critter_name = "Rat"
 goal_nodes = [ "Cheese" ]
 
@@ -53,14 +54,12 @@ hitbox_leniancy = 2
 shape = SubResource( 2 )
 
 [node name="CritterAttack" parent="." instance=ExtResource( 6 )]
-visible = false
 collision_mask = 16384
 
 [node name="CollisionShape2D" parent="CritterAttack" index="0"]
 shape = SubResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
-visible = false
 collision_layer = 4096
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -68,7 +67,6 @@ shape = SubResource( 4 )
 [connection signal="attack_animation_ended" from="CritterSprite" to="." method="_on_CritterSprite_attack_animation_ended"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="CritterAttack" to="." method="_on_CritterAttack_area_entered"]
-[connection signal="attack" from="CritterAttack" to="." method="_on_CritterAttack_attack"]
 
 [editable path="CritterSprite"]
 
