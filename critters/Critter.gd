@@ -57,8 +57,8 @@ func set_state(new_state):
 	state = CritterState[new_state]
 	if state == CritterState.CHASE:
 		create_alert()
-#	elif state == CritterState.IDLE:
-#		create_question_mark() # TODO: probably not sufficient once we have eating/destroying target
+	elif state == CritterState.IDLE:
+		create_question_mark() # TODO: probably not sufficient once we have eating/destroying target
 
 func create_question_mark():
 	clear_alerts()

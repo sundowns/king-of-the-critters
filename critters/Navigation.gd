@@ -62,7 +62,6 @@ func _on_Navigation_body_entered(body: Node):
 		if body.global_position.distance_to(parent.global_position) < current_target.global_position.distance_to(parent.global_position):
 			current_target = body
 			parent.state = 'CHASE'
-	set_path_to_target()
 
 func _on_Navigation_body_exited(body: Node):
 	if not current_target:
@@ -70,11 +69,12 @@ func _on_Navigation_body_exited(body: Node):
 	if not is_goal_node(body):
 		return
 	if body.get_instance_id() == current_target.get_instance_id():
-		current_target = null
 		path = PoolVector2Array()
-		for body in get_overlapping_bodies():
-			if is_goal_node(body) and body != current_target:
-				current_target = body
+		var previous_target = current_target
+		current_target = null
+		for other_body in get_overlapping_bodies():
+			if is_goal_node(other_body) and other_body.get_instance_id() != previous_target.get_instance_id():
+				current_target = other_body
 				parent.state = 'CHASE'
 				return
 		parent.state = 'IDLE'
