@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 export var KNOCKBACK_FRICTION = 150
 export var KNOCKBACK_FORCE: int = 80
-export var HIT_ANIMATION_NAME = "RatHitEffect"
 export(Array) var goal_nodes: Array
 
 const ATTACK_FROM_CHASE_DELAY = 0.5
@@ -17,7 +16,7 @@ onready var navigation = $Navigation
 onready var stats = $Stats
 onready var critter_attack = $CritterAttack
 onready var attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
-onready var hit_effect_scene = preload("res://effects/RatHitEffect.tscn") #TODO: other hit effects
+onready var hit_effect_scene = preload("res://effects/HitEffect.tscn") #TODO: other hit effects
 
 enum CritterState {
 	IDLE,
