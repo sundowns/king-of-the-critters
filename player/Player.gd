@@ -25,6 +25,8 @@ onready var collision_shape = $CollisionShape2D
 onready var critter_detection_zone = $CritterDetectionZone
 onready var critter_detection_zone_collision = $CritterDetectionZone/CollisionShape2D
 
+onready var particle_emitter: Particles2D = $AttachCritterParticles
+
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -88,6 +90,7 @@ func detect_critters():
 			assume_control_of_target()
 
 func assume_control_of_target():
+	particle_emitter.restart()
 	crown_sprite.visible = false
 	var critter_sprite = control_target.get_node("CritterSprite").duplicate()
 	critter_sprite.material = null

@@ -34,7 +34,9 @@ goal_nodes = [ "Rat" ]
 frame = 366
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
-position = Vector2( 0.5, -8 )
+visible = true
+position = Vector2( 0.5, -6.5 )
+scale = Vector2( 0.45, 0.45 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.297638, 0 )
