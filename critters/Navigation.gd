@@ -48,7 +48,7 @@ func set_path(value: PoolVector2Array):
 		return
 
 func set_path_to_target():
-	set_path(nav_map.get_simple_path(parent.global_position, current_target.global_position))
+	set_path(nav_map.get_simple_path(parent.global_position, current_target.global_position, false))
 
 func _on_Navigation_body_entered(body: Node):
 	if not is_goal_node(body):
