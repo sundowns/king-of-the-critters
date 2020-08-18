@@ -5,5 +5,4 @@ func _ready():
 	play()
 
 func _on_animation_finished():
-	pass
-#	get_parent().queue_free()
+	get_parent().queue_free()

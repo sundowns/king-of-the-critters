@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var KNOCKBACK_FRICTION = 150
 export var KNOCKBACK_FORCE: int = 80
-export var ANIMATION_NAME = "Rat"
+export var HIT_ANIMATION_NAME = "RatHitEffect"
 export(Array) var goal_nodes: Array
 
 onready var sprite = $CritterSprite
@@ -122,8 +122,6 @@ func _on_CritterAttack_area_entered(area):
 
 func _on_CritterSprite_attack_animation_ended():
 	create_hit_effect(attack_target)
-	
-	# TODO: maaaaybe play our attack here instead so we can pick based on attacker
 	var knockback_vector = global_position.direction_to(attack_target.global_position)
 	attack_target.on_hit(critter_attack.damage, knockback_vector * KNOCKBACK_FORCE)
 	state = CritterState.CHASE

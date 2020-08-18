@@ -16,6 +16,7 @@ var velocity = Vector2.ZERO
 var state = PlayerState.CROWN
 var control_target: KinematicBody2D = null
 var current_critter_type: String = ""
+var current_critter_health: int = 1
 
 onready var animation_player = $AnimationPlayer
 onready var crown_sprite = $Crown
@@ -95,7 +96,8 @@ func assume_control_of_target():
 	add_child(critter_sprite)
 	
 	collision_shape.disabled = false
-	current_critter_type = control_target.name
+	current_critter_type = control_target.stats.nav_alias
+	current_critter_health = control_target.stats.health
 	global_position = control_target.global_position
 	control_target.player_assumed_control()
 	control_target = null
@@ -108,10 +110,12 @@ func release_target():
 	get_node("CritterSprite").queue_free()
 	critter_detection_zone_collision.disabled = false
 	
-	# Probably a much better way to do this but idk
+	# Spawn our critter back
 	var new_critter = load(critter_scene_path_format.format({"str": current_critter_type})).instance()
 	new_critter.global_position = global_position
 	get_parent().add_child(new_critter)
+	# seems like this has to be done after adding as a child or stat values dont get set (cause its onready probably?)
+	new_critter.get_node("Stats").set_health(current_critter_health)
 	state = PlayerState.CROWN
 
 func update_control_target(new_target):
