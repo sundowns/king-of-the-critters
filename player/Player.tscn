@@ -83,5 +83,4 @@ disabled = true
 autoplay = "Move"
 anims/Move = SubResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="CameraTransform2D" type="RemoteTransform2D" parent="."]

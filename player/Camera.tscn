@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://CameraBounds.gd" type="Script" id=1]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 160, 90 )
+current = true
+script = ExtResource( 1 )
+
+[node name="Bounds" type="Node" parent="."]
+
+[node name="TopLeft" type="Position2D" parent="Bounds"]
+
+[node name="BottomRight" type="Position2D" parent="Bounds"]
