@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://art/Tilesheet/updated_tileset.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://items/Cheese.tscn" type="PackedScene" id=6]
 [ext_resource path="res://items/Meat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/Camera.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Level.gd" type="Script" id=9]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -632,6 +633,7 @@ points = PoolVector2Array( 5.59048, 2.23792, 10.6295, 2.04411, 13.5366, 12.8973,
 0/z_index = 0
 
 [node name="World" type="Node2D"]
+script = ExtResource( 9 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 8 )]
 position = Vector2( 99.8814, 69.4745 )

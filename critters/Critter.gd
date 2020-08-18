@@ -18,6 +18,8 @@ onready var critter_attack = $CritterAttack
 onready var attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
 onready var hit_effect_scene = preload("res://effects/HitEffect.tscn") #TODO: other hit effects
 
+signal critter_removed
+
 enum CritterState {
 	IDLE,
 	CHASE,
@@ -30,6 +32,7 @@ var attack_target: Node2D = null
 var knockback = Vector2.ZERO
 
 func _ready():
+	connect("critter_removed", get_tree().current_scene, "on_entity_removal")
 	crown_sprite.visible = false
 	if navigation:
 		navigation.goal_node_names = goal_nodes
@@ -136,4 +139,5 @@ func _on_CritterSprite_attack_animation_ended():
 	# TODO: set a timer/delay before
 	
 func _on_Stats_no_health():
+	emit_signal("critter_removed")
 	queue_free()

@@ -1,5 +1,7 @@
 extends Node
 
+
+
 export var max_health = 1
 export var nav_alias: String = ""
 onready var health = max_health
