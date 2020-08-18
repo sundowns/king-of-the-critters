@@ -29,3 +29,12 @@
 - Damage/health
 - Hit effect
 - ~4 hours
+
+## Day 4
+
+- Fix navigation issues (not getting stuck on walls)
+- Fix some attacking bugs (stopping if they werent knocked out of range...)
+- Preserving health when critter picked up/dropped
+- Camera & camera locking
+- Basic score system tracking counts of entities
+- ~6 hours
