@@ -18,15 +18,15 @@ func _ready():
 func _process(delta):
 	if current_target:
 		set_path_to_target()
-	move_along_path(speed, delta)
+	move_along_path(delta)
 	
 func set_goal_node(new_goal_name):
 	goal_node_names = new_goal_name
 
-func move_along_path(speed: float, delta: float):
+func move_along_path(delta: float):
 	var distance = speed * delta # used for estimating distance to point
 	var start_point: Vector2 = parent.global_position
-	for i in range(path.size()):
+	for _i in range(path.size()):
 		var distance_to_next = start_point.distance_to(path[0])
 		var direction_to_next = start_point.direction_to(path[0])
 		if distance + hitbox_leniancy <= distance_to_next and distance >= 0.0:
@@ -53,7 +53,6 @@ func set_path_to_target():
 func _on_Navigation_body_entered(body: Node):
 	if not is_goal_node(body):
 		return
-	var updated = false
 	if not current_target:
 		current_target = body
 		parent.state = 'CHASE'

@@ -4,7 +4,7 @@ export var KNOCKBACK_FRICTION = 150
 export var KNOCKBACK_FORCE: int = 80
 export(Array) var goal_nodes: Array
 
-const ATTACK_FROM_CHASE_DELAY = 0.5
+const ATTACK_FROM_CHASE_DELAY = 0.75
 const alert_scene = preload("res://effects/Alert.tscn")
 const question_mark_scene = preload("res://effects/QuestionMark.tscn")
 
@@ -55,10 +55,10 @@ func _process(delta):
 			attack_state(delta)
 			return
 
-func idle_state(delta):
+func idle_state(_delta):
 	animation_player.play("Idle")
 
-func attack_state(delta):
+func attack_state(_delta):
 	if attack_target:
 		attack_current_target()
 
@@ -89,7 +89,7 @@ func create_question_mark():
 	clear_alerts()
 	var question_mark = question_mark_scene.instance()
 	question_mark.global_position = get_parent().global_position
-	add_child(question_mark, true)
+	call_deferred('add_child', question_mark, true) 
 
 func create_alert():
 	clear_alerts()
@@ -125,7 +125,7 @@ func hunt_new_target(target):
 	state = CritterState.ATTACK
 
 func reset_chase_attack_timer():
-	attack_from_chase_timer =  ATTACK_FROM_CHASE_DELAY
+	attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
 
 func _on_CritterSprite_attack_animation_ended():
 	create_hit_effect(attack_target)

@@ -8,8 +8,8 @@
 [ext_resource path="res://critters/Hurtbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.59063
-height = 0.0
+radius = 7.23318
+height = 4.74977
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 70.0

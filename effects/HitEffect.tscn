@@ -4,7 +4,7 @@
 [ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "Rat"
+resource_name = "Hit"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -43,6 +43,7 @@ hframes = 48
 frame = 558
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Rat"
-anims/Rat = SubResource( 1 )
+autoplay = "Hit"
+anims/Hit = SubResource( 1 )
 script = ExtResource( 1 )
+animation_name = "Hit"
