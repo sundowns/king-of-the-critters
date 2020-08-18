@@ -4,7 +4,6 @@ onready var parent: Node2D = get_parent()
 onready var nav_map: Navigation2D = get_tree().current_scene.get_node("NavigationMap")
 onready var hitbox: CollisionShape2D = get_parent().get_node("CollisionShape2D")
 
-
 export var speed: float = 1
 export var hitbox_leniancy = 3
 
