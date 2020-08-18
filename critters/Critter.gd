@@ -5,6 +5,10 @@ export var KNOCKBACK_FORCE: int = 80
 export var HIT_ANIMATION_NAME = "RatHitEffect"
 export(Array) var goal_nodes: Array
 
+const ATTACK_FROM_CHASE_DELAY = 0.5
+const alert_scene = preload("res://effects/Alert.tscn")
+const question_mark_scene = preload("res://effects/QuestionMark.tscn")
+
 onready var sprite = $CritterSprite
 onready var crown_sprite = $CritterSprite/CritterCrown
 onready var animation_player = $CritterSprite/AnimationPlayer
@@ -12,9 +16,8 @@ onready var shader_material = sprite.material
 onready var navigation = $Navigation
 onready var stats = $Stats
 onready var critter_attack = $CritterAttack
+onready var attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
 onready var hit_effect_scene = preload("res://effects/RatHitEffect.tscn") #TODO: other hit effects
-const alert_scene = preload("res://effects/Alert.tscn")
-const question_mark_scene = preload("res://effects/QuestionMark.tscn")
 
 enum CritterState {
 	IDLE,
@@ -61,20 +64,26 @@ func attack_state(delta):
 		attack_current_target()
 
 func chase_state(delta):
-	attack_target = null
 	animation_player.play("Walk")
 	if navigation:
 		navigation.set_process(true)
-	# TODO: sort out continuing to attack an adjacent target somehow :/
-#	for attackable in critter_attack.get_overlapping_areas():
-#		hunt_new_target(attackable.get_parent())
-#		break
+		
+	attack_from_chase_timer -= delta
+	if attack_from_chase_timer <= 0:
+		for attackable in critter_attack.get_overlapping_areas():
+			if attack_target:
+				if attack_target.get_instance_id() == attackable.get_parent().get_instance_id():
+					hunt_new_target(attackable.get_parent())
+			else:
+				hunt_new_target(attackable.get_parent())
+			break
 
 func set_state(new_state):
+	# This is only used when some external code sets this
 	state = CritterState[new_state]
 	if state == CritterState.CHASE:
 		create_alert()
-	elif state == CritterState.IDLE: # TODO: probably not sufficient (seems to be getting immediately interupted)
+	elif state == CritterState.IDLE:
 		create_question_mark() 
 
 func create_question_mark():
@@ -116,15 +125,16 @@ func hunt_new_target(target):
 	attack_target = target
 	state = CritterState.ATTACK
 
-func _on_CritterAttack_area_entered(area):
-	if navigation.current_target.get_instance_id() == area.get_parent().get_instance_id():
-		hunt_new_target(area.get_parent())
+func reset_chase_attack_timer():
+	attack_from_chase_timer =  ATTACK_FROM_CHASE_DELAY
 
 func _on_CritterSprite_attack_animation_ended():
 	create_hit_effect(attack_target)
 	var knockback_vector = global_position.direction_to(attack_target.global_position)
 	attack_target.on_hit(critter_attack.damage, knockback_vector * KNOCKBACK_FORCE)
 	state = CritterState.CHASE
+	reset_chase_attack_timer()
+	# TODO: set a timer/delay before
 	
 func _on_Stats_no_health():
 	queue_free()

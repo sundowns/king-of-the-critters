@@ -64,7 +64,6 @@ collision_layer = 2048
 shape = SubResource( 4 )
 [connection signal="attack_animation_ended" from="CritterSprite" to="." method="_on_CritterSprite_attack_animation_ended"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-[connection signal="area_entered" from="CritterAttack" to="." method="_on_CritterAttack_area_entered"]
 
 [editable path="CritterSprite"]
 
