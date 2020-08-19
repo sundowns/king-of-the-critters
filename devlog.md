@@ -38,3 +38,10 @@
 - Camera & camera locking
 - Basic score system tracking counts of entities
 - ~6 hours
+
+## Day 5
+
+- Win/loss conditions that are togglable per level
+- Restructured game to allow level progression
+- UI to show counts of food + timer
+- ~3 hours
