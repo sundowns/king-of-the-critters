@@ -44,4 +44,6 @@
 - Win/loss conditions that are togglable per level
 - Restructured game to allow level progression
 - UI to show counts of food + timer
-- ~3 hours
+- Pause + restart level button
+- Rough menu
+- ~5 hours

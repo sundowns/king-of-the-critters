@@ -49,9 +49,9 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_left = 8.5
+margin_left = 12.0
 margin_top = 10.0
-margin_right = 311.5
+margin_right = 315.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
 text = "king of the critters"
