@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://art/Tilesheet/updated_tileset.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://items/Meat.tscn" type="PackedScene" id=8]
 [ext_resource path="res://items/Cheese.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/LevelUI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/PauseUI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -635,9 +636,7 @@ points = PoolVector2Array( 5.59048, 2.23792, 10.6295, 2.04411, 13.5366, 12.8973,
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-meat_enabled = false
-timer_enabled = false
-time_allowed = 5
+time_allowed = 60
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -663,10 +662,10 @@ position = Vector2( 180.418, 109.588 )
 position = Vector2( 279.288, 129.382 )
 
 [node name="Rat" parent="Level/YSort" instance=ExtResource( 7 )]
-position = Vector2( 90.8759, 175.83 )
+position = Vector2( 222.223, 99.9198 )
 
 [node name="Crocodile" parent="Level/YSort" instance=ExtResource( 5 )]
-position = Vector2( 78.6588, 130.906 )
+position = Vector2( 91.258, 135.001 )
 
 [node name="Player" parent="Level/YSort" instance=ExtResource( 6 )]
 position = Vector2( 99.8814, 69.4745 )
@@ -675,7 +674,7 @@ position = Vector2( 99.8814, 69.4745 )
 remote_path = NodePath("../../../../Camera2D")
 
 [node name="Meat" parent="Level/YSort" instance=ExtResource( 8 )]
-position = Vector2( 137.559, 100.951 )
+position = Vector2( 146.549, 88.59 )
 
 [node name="Cheese" parent="Level/YSort" instance=ExtResource( 9 )]
 position = Vector2( 265.309, 140.433 )
@@ -700,6 +699,9 @@ position = Vector2( 368.025, 223.977 )
 margin_left = -0.420456
 margin_right = -0.420471
 rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="PauseUI" parent="CanvasLayer" instance=ExtResource( 11 )]
+[connection signal="restart_level" from="CanvasLayer/PauseUI" to="." method="_on_PauseUI_restart_level"]
 
 [editable path="Level/YSort/Player"]
 

@@ -12,6 +12,7 @@ var is_entity_counts_dirty = true
 var tick_timer = 0
 var player_won = false
 var player_lost = false
+var is_paused = false
 
 const TICK_DURATION = 1 # 1 second
 
@@ -36,16 +37,17 @@ func initialise_timer():
 	emit_signal("time_left_updated", int(level_timer.time_left) -1)
 
 func _process(delta):
-	tick_timer += delta
 	if is_entity_counts_dirty:
 		count_entities()
 		evaluate_end_conditions()
 		is_entity_counts_dirty = false
 		
+	tick_timer += delta
 	if tick_timer > TICK_DURATION:
 		tick_timer -= TICK_DURATION
 		check_for_level_win()
 		emit_signal("time_left_updated", int(level_timer.time_left))
+		
 
 func count_entities():
 	cheese_count = 0
@@ -76,7 +78,7 @@ func check_for_level_loss():
 		food_count += meat_count
 	if food_count <= 0:
 		print("Defeat - food sources depleted :c")
-		
+
 func check_for_level_win():
 	if critter_count <= 0:
 		print("Victory! - critters got owned")
@@ -85,3 +87,7 @@ func check_for_level_win():
 
 func on_entity_removal():
 	is_entity_counts_dirty = true
+
+func _on_PauseUI_restart_level():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
