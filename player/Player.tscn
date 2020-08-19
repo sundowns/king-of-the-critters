@@ -45,7 +45,7 @@ tracks/1/keys = {
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0.354167, 1 )
-colors = PoolColorArray( 1, 0.723633, 0, 1, 1, 0.973011, 0.902344, 1 )
+colors = PoolColorArray( 1, 0.72549, 0, 1, 1, 0.973011, 0.902344, 1 )
 
 [sub_resource type="GradientTexture" id=6]
 gradient = SubResource( 5 )
