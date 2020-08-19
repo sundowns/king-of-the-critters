@@ -8,8 +8,8 @@
 [ext_resource path="res://critters/Hurtbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 7.23318
-height = 4.74977
+radius = 7.94329
+height = 0.523702
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 70.0
@@ -32,10 +32,11 @@ goal_nodes = [ "Cat", "Meat" ]
 
 [node name="CritterSprite" parent="." instance=ExtResource( 1 )]
 scale = Vector2( 1.2, 1.2 )
-frame = 413
+frame = 414
 
 [node name="CritterCrown" parent="CritterSprite" index="0"]
-position = Vector2( 0, -3 )
+position = Vector2( 0, -8.5 )
+scale = Vector2( 0.7, 0.7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

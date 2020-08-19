@@ -5,6 +5,8 @@ var meat_count: int = 0
 var critter_count: int = 0
 var is_dirty = true
 
+signal counts_changed(cheese_count, meat_count, critter_count)
+
 onready var entity_list = $YSort
 
 # Called when the node enters the scene tree for the first time.
@@ -33,6 +35,7 @@ func count_entities():
 				meat_count += 1
 			'Rat','Cat','Crocodile':
 				critter_count += 1
+	emit_signal("counts_changed", cheese_count, meat_count, critter_count)
 
 func evaluate_counts():
 	# TODO: trigger the win/loss conditions here
