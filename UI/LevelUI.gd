@@ -3,6 +3,7 @@ extends Control
 onready var cheese_count_label: Label = $Container/CheeseControl/Cheese
 onready var meat_count_label: Label = $Container/MeatControl/Meat
 onready var timer_count_label: Label = $Container/TimeControl/Time
+onready var current_level: Label = $CurrentLevel
 
 onready var cheese_container: Container = $Container/CheeseControl
 onready var meat_container: Container = $Container/MeatControl
@@ -17,6 +18,7 @@ func _ready():
 	get_tree().current_scene.connect("counts_changed", self, "set_counts")
 	get_tree().current_scene.connect("goals_set", self, "set_flags")
 	get_tree().current_scene.connect("time_left_updated", self, "set_time")
+	current_level.text = "lvl%d" % (Global.current_level_index + 1)
 
 func set_flags(cheese_enabled, meat_enabled, time_enabled):
 	cheese_container.visible = cheese_enabled

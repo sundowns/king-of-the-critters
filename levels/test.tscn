@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://levels/TileMapResource.tres" type="TileSet" id=2]
@@ -9,12 +9,11 @@
 [ext_resource path="res://critters/Rat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://items/Meat.tscn" type="PackedScene" id=8]
 [ext_resource path="res://items/Cheese.tscn" type="PackedScene" id=9]
-[ext_resource path="res://UI/LevelUI.tscn" type="PackedScene" id=10]
-[ext_resource path="res://UI/PauseUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://UI/IngameUI.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-time_allowed = 60
+time_allowed = 50
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -40,7 +39,7 @@ position = Vector2( 180.418, 109.588 )
 position = Vector2( 279.288, 129.382 )
 
 [node name="Rat" parent="Level/YSort" instance=ExtResource( 7 )]
-position = Vector2( 222.223, 99.9198 )
+position = Vector2( 283.644, 96.14 )
 
 [node name="Crocodile" parent="Level/YSort" instance=ExtResource( 5 )]
 position = Vector2( 91.258, 135.001 )
@@ -55,10 +54,10 @@ position = Vector2( 103.082, 39.453 )
 position = Vector2( 265.309, 140.433 )
 
 [node name="Crocodile2" parent="Level/YSort" instance=ExtResource( 5 )]
-position = Vector2( 42.7018, 82.7815 )
+position = Vector2( 87.6031, 39.648 )
 
 [node name="Cheese2" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 192.057, 145.975 )
+position = Vector2( 278.542, 107.264 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 99.8814, 69.4745 )
@@ -68,15 +67,7 @@ limit_top = 0
 [node name="BottomRight" parent="Camera2D/Bounds" index="1"]
 position = Vector2( 368.025, 223.977 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="LevelUI" parent="CanvasLayer" instance=ExtResource( 10 )]
-margin_left = -0.420456
-margin_right = -0.420471
-rect_scale = Vector2( 0.7, 0.7 )
-
-[node name="PauseUI" parent="CanvasLayer" instance=ExtResource( 11 )]
-[connection signal="restart_level" from="CanvasLayer/PauseUI" to="." method="_on_PauseUI_restart_level"]
+[node name="GameUI" parent="." instance=ExtResource( 10 )]
 
 [editable path="Level/YSort/Player"]
 

@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/LevelUI.gd" type="Script" id=1]
 [ext_resource path="res://art/ui/meat.png" type="Texture" id=2]
 [ext_resource path="res://art/ui/cheese.png" type="Texture" id=3]
 [ext_resource path="res://art/kenny1bit_3.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://art/ui/timer.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+outline_color = Color( 0.913725, 0.701961, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -19,9 +24,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CurrentLevel" type="Label" parent="."]
+margin_left = 6.45415
+margin_top = 2.86215
+margin_right = 42.4542
+margin_bottom = 13.8622
+custom_fonts/font = SubResource( 2 )
+text = "lvl1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Container" type="VBoxContainer" parent="."]
 margin_left = 4.0
-margin_top = 4.0
+margin_top = 18.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,7 +68,6 @@ custom_fonts/font = SubResource( 1 )
 text = "4"
 align = 1
 valign = 2
-percent_visible = -1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

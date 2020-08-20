@@ -19,6 +19,10 @@ config/name="Mizzjam"
 run/main_scene="res://UI/Menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [display]
 
 window/size/width=320

@@ -47,3 +47,12 @@
 - Pause + restart level button
 - Rough menu
 - ~5 hours
+
+## Day 6
+
+- Toggleable doors
+- Planned out some sfx
+- Level progression system
+- Win/Loss screens
+- Thanks for playing scene
+- ~2.5

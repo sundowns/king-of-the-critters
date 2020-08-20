@@ -19,6 +19,8 @@ const TICK_DURATION = 1 # 1 second
 signal counts_changed(cheese_count, meat_count, critter_count)
 signal goals_set(cheese_enabled, meat_enabled, timer_enabled)
 signal time_left_updated(time_left)
+signal level_complete
+signal level_failed
 
 onready var entity_list = $Level/YSort
 onready var level_timer: Timer = $Level/LevelTimer
@@ -26,6 +28,10 @@ onready var level_timer: Timer = $Level/LevelTimer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(!timer_enabled or time_allowed > 0, "Level has a timer but no value provided :c")
+	connect("level_complete", $GameUI/LevelCompleteUI, "show")
+	connect("level_complete", $GameUI/PauseUI, "freeze")
+	connect("level_failed", $GameUI/LevelFailedUI, "show")
+	connect("level_failed", $GameUI/PauseUI, "freeze")
 	emit_signal("goals_set", cheese_enabled, meat_enabled, timer_enabled)
 	count_entities()
 	if timer_enabled:
@@ -47,6 +53,17 @@ func _process(delta):
 		tick_timer -= TICK_DURATION
 		check_for_level_win()
 		emit_signal("time_left_updated", int(level_timer.time_left))
+		
+	if player_won:
+		get_tree().paused = true
+		emit_signal("level_complete")
+		set_process(false)
+		return
+	elif player_lost:
+		get_tree().paused = true
+		emit_signal("level_failed")
+		set_process(false)
+		return
 		
 
 func count_entities():
@@ -78,16 +95,19 @@ func check_for_level_loss():
 		food_count += meat_count
 	if food_count <= 0:
 		print("Defeat - food sources depleted :c")
+		player_lost = true
 
 func check_for_level_win():
 	if critter_count <= 0:
 		print("Victory! - critters got owned")
+		player_won = true
 	if timer_enabled and level_timer.time_left <= 0:
 		print("Victory! - food sources protected")
+		player_won = true
 
 func on_entity_removal():
 	is_entity_counts_dirty = true
 
-func _on_PauseUI_restart_level():
+func _on_restart_level():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
