@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Dialogue.gd" type="Script" id=1]
+[ext_resource path="res://player/Crown.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/kenny1bit_3.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://UI/dialogue_font.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.58, 0.888 )
+colors = PoolColorArray( 0.278431, 0.176471, 0.235294, 1, 0.175781, 0.164795, 0.171133, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 100
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.044, 0.868 )
+colors = PoolColorArray( 0.811765, 0.776471, 0.721569, 1, 0.811765, 0.776471, 0.721569, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 7
+extra_spacing_char = -1
+font_data = ExtResource( 3 )
+
+[node name="Dialogue" type="Control"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_top = 181.0
+margin_right = 181.0
+margin_bottom = 501.0
+rect_rotation = -90.0
+texture = SubResource( 2 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Crown" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160, 45 )
+scale = Vector2( 2, 2 )
+offset = Vector2( 0, 0.955864 )
+
+[node name="DialogueBox" type="Control" parent="."]
+margin_top = -8.0
+margin_right = 40.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="DialogueBox"]
+anchor_right = 4.0
+anchor_bottom = 4.51
+margin_left = 40.0
+margin_top = 170.0
+margin_right = -60.0
+margin_bottom = 229.6
+rect_rotation = -90.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogueBox"]
+anchor_left = 1.0
+anchor_top = 2.748
+anchor_right = 6.98
+anchor_bottom = 4.229
+margin_left = 8.0
+margin_top = 6.07999
+margin_right = -8.20001
+margin_bottom = -5.16
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 4 )
+custom_colors/default_color = Color( 0.14902, 0.129412, 0.117647, 1 )
+bbcode_enabled = true
+bbcode_text = "hi there gamer gods asdasd as i love t os ada agaming i game melee marth yes i like w"
+text = "hi there gamer gods asdasd as i love t os ada agaming i game melee marth yes i like w"
+scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="DialogueBox"]
+
+[node name="Prompt" type="Label" parent="."]
+margin_left = 96.0
+margin_top = 168.0
+margin_right = 220.0
+margin_bottom = 182.0
+custom_fonts/font = SubResource( 6 )
+text = "space to continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}

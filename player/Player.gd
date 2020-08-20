@@ -22,7 +22,7 @@ var current_critter_type: String = ""
 var current_critter_health: int = 1
 var is_highlighting_door: bool = false
 
-onready var animation_player = $AnimationPlayer
+onready var animation_player = $Crown/AnimationPlayer
 onready var crown_sprite = $Crown
 onready var collision_shape = $CollisionShape2D
 onready var critter_detection_zone = $CritterDetectionZone
@@ -33,6 +33,7 @@ onready var tile_map: TileMap = get_tree().current_scene.find_node("TileAtlasWit
 
 func _ready():
 	# attach our remote transform to the scenes camera if there is one
+	animation_player.play("Move")
 	var camera = get_tree().current_scene.find_node("Camera2D")
 	if camera:
 		camera_transform.remote_path = camera.get_path()

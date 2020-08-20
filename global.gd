@@ -4,10 +4,16 @@ var levels: Array = [
 	"test.tscn",
 	"test.tscn"
 ]
-var current_level_index = 0
+
+var dialogue: Dictionary = {
+	1: "I have been known to fug widdit indeedy"
+}
+
+var current_level_index = -1
 
 func start_game():
-	current_level_index = 0
+	current_level_index = -1
+	load_next_level()
 	get_tree().change_scene("res://levels/%s" % levels[current_level_index])
 
 func load_next_level():
@@ -16,8 +22,22 @@ func load_next_level():
 		all_levels_complete()
 		return
 	else:
-		get_tree().change_scene("res://levels/%s" % levels[current_level_index])
-		get_tree().paused = false
+		if dialogue.has(current_level_index):
+			load_dialogue_scene()
+		else: 
+			get_tree().change_scene("res://levels/%s" % levels[current_level_index])
+		
+
+func load_dialogue_scene():
+	var dialogue_scene: PackedScene = load("res://Dialogue.tscn")
+	get_tree().change_scene_to(dialogue_scene)
+	call_deferred('set_dialogue_scene_text', dialogue.get(current_level_index))
+
+func set_dialogue_scene_text(text):
+	get_tree().current_scene.dialogue = text
 
 func all_levels_complete():
 	get_tree().change_scene("res://UI/GameComplete.tscn")
+
+func dialogue_finished():
+	get_tree().change_scene("res://levels/%s" % levels[current_level_index])

@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://shaders/outline.tres" type="Material" id=1]
+[ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=2]
+[ext_resource path="res://art/Tilesheet/colored_transparent.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 664, 222, 14, 14 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 664, 222, 14, 14 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Dialogue"
+length = 2.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.6 ), Vector2( 0.975, 0.575 ), Vector2( 0.925, 0.55 ), Vector2( 0.975, 0.575 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.6 ), Vector2( 0.975, 0.575 ), Vector2( 0.925, 0.55 ), Vector2( 0.975, 0.575 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HighlightedShadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.6 ), Vector2( 0.975, 0.575 ), Vector2( 0.925, 0.55 ), Vector2( 0.975, 0.575 ) ]
+}
+
+[node name="Crown" type="Sprite"]
+position = Vector2( 0, -15 )
+texture = ExtResource( 2 )
+vframes = 22
+hframes = 48
+frame = 139
+
+[node name="Shadow" type="Sprite" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 0.588235 )
+self_modulate = Color( 0.839216, 0.839216, 0.839216, 1 )
+position = Vector2( 0, 15 )
+scale = Vector2( 1, 0.6 )
+texture = SubResource( 1 )
+
+[node name="HighlightedShadow" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.662745 )
+material = ExtResource( 1 )
+position = Vector2( 0, 15 )
+scale = Vector2( 1, 0.6 )
+texture = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Move"
+method_call_mode = 1
+anims/Dialogue = SubResource( 3 )
+anims/Move = SubResource( 4 )
