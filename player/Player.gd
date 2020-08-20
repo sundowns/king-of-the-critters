@@ -11,12 +11,16 @@ enum PlayerState {
 
 const critter_scene_path_format = "res://critters/{str}.tscn"
 const sprite_walk_rotation = 4
+# insane hack.... tile atlas seems to be kind of terrible
+const CLOSED_DOOR_CELL_ID = 7
+const OPEN_DOOR_CELL_ID = 8
 
 var velocity = Vector2.ZERO
 var state = PlayerState.CROWN
 var control_target: KinematicBody2D = null
 var current_critter_type: String = ""
 var current_critter_health: int = 1
+var is_highlighting_door: bool = false
 
 onready var animation_player = $AnimationPlayer
 onready var crown_sprite = $Crown
@@ -25,6 +29,7 @@ onready var critter_detection_zone = $CritterDetectionZone
 onready var critter_detection_zone_collision = $CritterDetectionZone/CollisionShape2D
 onready var particle_emitter: Particles2D = $AttachCritterParticles
 onready var camera_transform: RemoteTransform2D = $CameraTransform2D
+onready var tile_map: TileMap = get_tree().current_scene.find_node("TileAtlasWithBackground")
 
 func _ready():
 	# attach our remote transform to the scenes camera if there is one
@@ -45,11 +50,22 @@ func _physics_process(delta):
 			move_controlled_state(delta, input_vector)
 			
 
+func _process(delta):
+	# yeeeeeeeeeeeeeeeeee haw
+	if is_highlighting_door:
+		$Crown/HighlightedShadow.visible = true
+		$Crown/Shadow.visible = false
+	else:
+		$Crown/HighlightedShadow.visible = false
+		$Crown/Shadow.visible = true
+
 func move_crown_state(delta, input_vector):
 	crown_sprite.visible = true
 	animation_player.play("Move")
 	player_movement(delta, input_vector)
 	move()
+	if control_target == null: # no critter being targetted
+		detect_doors()
 	detect_critters()
 
 func move_controlled_state(delta, input_vector):
@@ -93,6 +109,23 @@ func detect_critters():
 	if control_target:
 		if Input.is_action_just_pressed("ui_accept"):
 			assume_control_of_target()
+
+func detect_doors():
+	if tile_map:
+		var player_tilemap_pos = tile_map.world_to_map(global_position)
+		var cell_id = tile_map.get_cellv(player_tilemap_pos)
+		# if it is a door, check for action
+		if cell_id == OPEN_DOOR_CELL_ID or cell_id == CLOSED_DOOR_CELL_ID:
+			is_highlighting_door = true
+			# if input pressed, swap it to the other index (closed vs open)
+			if Input.is_action_just_pressed("ui_accept"):
+				if cell_id == OPEN_DOOR_CELL_ID:
+					tile_map.set_cellv(player_tilemap_pos, CLOSED_DOOR_CELL_ID)
+				elif cell_id == CLOSED_DOOR_CELL_ID:
+					tile_map.set_cellv(player_tilemap_pos, OPEN_DOOR_CELL_ID)
+		else: 
+			is_highlighting_door = false
+
 
 func assume_control_of_target():
 	particle_emitter.restart()
