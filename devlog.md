@@ -55,4 +55,5 @@
 - Level progression system
 - Win/Loss screens
 - Thanks for playing scene
-- ~2.5
+- Dialogue scene
+- ~4.5
