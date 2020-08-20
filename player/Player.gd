@@ -21,11 +21,16 @@ var current_critter_health: int = 1
 onready var animation_player = $AnimationPlayer
 onready var crown_sprite = $Crown
 onready var collision_shape = $CollisionShape2D
-
 onready var critter_detection_zone = $CritterDetectionZone
 onready var critter_detection_zone_collision = $CritterDetectionZone/CollisionShape2D
-
 onready var particle_emitter: Particles2D = $AttachCritterParticles
+onready var camera_transform: RemoteTransform2D = $CameraTransform2D
+
+func _ready():
+	# attach our remote transform to the scenes camera if there is one
+	var camera = get_tree().current_scene.find_node("Camera2D")
+	if camera:
+		camera_transform.remote_path = camera.get_path()
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO

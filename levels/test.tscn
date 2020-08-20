@@ -670,9 +670,6 @@ position = Vector2( 91.258, 135.001 )
 [node name="Player" parent="Level/YSort" instance=ExtResource( 6 )]
 position = Vector2( 99.8814, 69.4745 )
 
-[node name="CameraTransform2D" parent="Level/YSort/Player" index="4"]
-remote_path = NodePath("../../../../Camera2D")
-
 [node name="Meat" parent="Level/YSort" instance=ExtResource( 8 )]
 position = Vector2( 146.549, 88.59 )
 
