@@ -55,12 +55,10 @@ func _process(delta):
 		emit_signal("time_left_updated", int(level_timer.time_left))
 		
 	if player_won:
+		play_item_win_effect()
+		yield(get_tree().create_timer(3.0), "timeout")
 		emit_signal("level_complete")
-		pause_all_entities()
-		yield(get_tree().create_timer(2.0), "timeout")
-		# TODO: play animation on our food! (maybe use level complete signal)
 		get_tree().paused = true
-		set_process(false)
 		return
 	elif player_lost:
 		emit_signal("level_failed")
@@ -74,12 +72,8 @@ func _process(delta):
 func pause_all_entities():
 	var current_entities = $Level/YSort
 	for node in current_entities.get_children():
-		if not node.has_node("Navigation"):
-			# its a player
-			continue
-		node.set_process(false)
-		var navigation = node.get_node("Navigation")
-		navigation.force_stop()
+		if node.has_node("Navigation"):
+			node.force_stop()
 
 func count_entities():
 	cheese_count = 0
@@ -126,3 +120,15 @@ func on_entity_removal():
 func _on_restart_level():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
+func play_item_win_effect():
+	var current_entities = $Level/YSort
+	for node in current_entities.get_children():
+		if node.has_node("ItemEffect"):
+			node.play_hit_effect()
+
+func freeze():
+	pause_all_entities()
+	get_tree().paused = true
+	set_process(false)
+	

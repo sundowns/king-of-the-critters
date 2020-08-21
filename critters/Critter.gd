@@ -103,6 +103,8 @@ func create_alert():
 func create_hit_effect(target: Node2D):
 	var hit_effect = hit_effect_scene.instance()
 	add_child(hit_effect)
+	if not hit_effect:
+		return
 	hit_effect.global_position = hit_effect.global_position.move_toward(target.global_position, hit_effect.global_position.distance_to(target.global_position) * 0.75)
 
 func clear_alerts():
@@ -141,3 +143,7 @@ func _on_CritterSprite_attack_animation_ended():
 func _on_Stats_no_health():
 	emit_signal("critter_removed")
 	queue_free()
+
+func force_stop():
+	$Navigation.stop()
+	set_process(false)

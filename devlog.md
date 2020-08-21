@@ -65,5 +65,5 @@
 - First two tutorial levels
 - Intro dialogue scenes
 - Variable speed when controlling different critters
-- Tractor beam animation WIP
-- ~2.5 hours
+- Tractor beam animation
+- ~5 hours

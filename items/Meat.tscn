@@ -1,17 +1,40 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=1]
 [ext_resource path="res://critters/Stats.tscn" type="PackedScene" id=2]
 [ext_resource path="res://critters/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://items/Item.gd" type="Script" id=4]
+[ext_resource path="res://art/ui/meat.png" type="Texture" id=5]
+[ext_resource path="res://effects/ItemEffect.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 3.8125
 height = 3.375
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=8]
 radius = 4.35764
 height = 4.65187
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.836879 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0.211765 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 40.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 100.0
+damping = 50.0
+scale = 0.7
+color_ramp = SubResource( 6 )
 
 [node name="Meat" type="KinematicBody2D"]
 collision_layer = 8
@@ -20,8 +43,9 @@ script = ExtResource( 4 )
 KNOCKBACK_FRICTION = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
@@ -35,11 +59,24 @@ max_health = 2
 nav_alias = "Meat"
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+visible = false
 collision_layer = 8192
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 8 )
+
+[node name="ItemEffect" parent="." instance=ExtResource( 6 )]
+process_material = SubResource( 9 )
+texture = ExtResource( 5 )
+
+[node name="Ring" parent="ItemEffect" index="0"]
+modulate = Color( 0.74902, 0.47451, 0.345098, 1 )
+
+[node name="BeamSprite" parent="ItemEffect" index="1"]
+modulate = Color( 0.74902, 0.47451, 0.345098, 1 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
+
+[editable path="ItemEffect"]
