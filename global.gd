@@ -6,7 +6,7 @@ var levels: Array = [
 ]
 
 var dialogue: Dictionary = {
-	1: "I have been known to fug widdit indeedy"
+	1: [["Rats......",1.5], ["Cats............",1.5], ["am I so different to them after all?", 3.5], ["Cheese....... Cheese I like.",3.5]]
 }
 
 var current_level_index = -1

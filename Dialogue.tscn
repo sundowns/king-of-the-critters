@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://player/Crown.tscn" type="PackedScene" id=2]
 [ext_resource path="res://art/kenny1bit_3.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://UI/dialogue_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://art/ui/next_line_prompt.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.58, 0.888 )
@@ -13,17 +14,34 @@ colors = PoolColorArray( 0.278431, 0.176471, 0.235294, 1, 0.175781, 0.164795, 0.
 gradient = SubResource( 1 )
 width = 100
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.044, 0.868 )
 colors = PoolColorArray( 0.811765, 0.776471, 0.721569, 1, 0.811765, 0.776471, 0.721569, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 7
 extra_spacing_char = -1
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Default"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ) ]
+}
 
 [node name="Dialogue" type="Control"]
 script = ExtResource( 1 )
@@ -69,7 +87,7 @@ margin_top = 170.0
 margin_right = -60.0
 margin_bottom = 229.6
 rect_rotation = -90.0
-texture = SubResource( 5 )
+texture = SubResource( 4 )
 expand = true
 __meta__ = {
 "_edit_lock_": true,
@@ -98,13 +116,23 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="DialogueBox"]
 
-[node name="Prompt" type="Label" parent="."]
+[node name="FinishPrompt" type="Label" parent="."]
 margin_left = 96.0
 margin_top = 168.0
 margin_right = 220.0
 margin_bottom = 182.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "space to continue"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NextPrompt" type="Sprite" parent="."]
+position = Vector2( 272, 155 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -0.5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NextPrompt"]
+autoplay = "Default"
+anims/Default = SubResource( 6 )
