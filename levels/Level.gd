@@ -55,16 +55,31 @@ func _process(delta):
 		emit_signal("time_left_updated", int(level_timer.time_left))
 		
 	if player_won:
-		get_tree().paused = true
 		emit_signal("level_complete")
+		pause_all_entities()
+		yield(get_tree().create_timer(2.0), "timeout")
+		# TODO: play animation on our food! (maybe use level complete signal)
+		get_tree().paused = true
 		set_process(false)
 		return
 	elif player_lost:
-		get_tree().paused = true
 		emit_signal("level_failed")
+		pause_all_entities()
+		yield(get_tree().create_timer(2.0), "timeout")
+		get_tree().paused = true
 		set_process(false)
 		return
 		
+
+func pause_all_entities():
+	var current_entities = $Level/YSort
+	for node in current_entities.get_children():
+		if not node.has_node("Navigation"):
+			# its a player
+			continue
+		node.set_process(false)
+		var navigation = node.get_node("Navigation")
+		navigation.force_stop()
 
 func count_entities():
 	cheese_count = 0
@@ -94,15 +109,15 @@ func check_for_level_loss():
 	if meat_enabled:
 		food_count += meat_count
 	if food_count <= 0:
-		print("Defeat - food sources depleted :c")
+#		print("Defeat - food sources depleted :c")
 		player_lost = true
 
 func check_for_level_win():
 	if critter_count <= 0:
-		print("Victory! - critters got owned")
+#		print("Victory! - critters got owned")
 		player_won = true
 	if timer_enabled and level_timer.time_left <= 0:
-		print("Victory! - food sources protected")
+#		print("Victory! - food sources protected")
 		player_won = true
 
 func on_entity_removal():

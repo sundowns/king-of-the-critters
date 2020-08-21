@@ -1,20 +1,21 @@
 extends Node
 
 var levels: Array = [
-	"test.tscn",
+	"tutorial1.tscn",
+	"tutorial2.tscn",
 	"test.tscn"
 ]
 
 var dialogue: Dictionary = {
-	1: [["Rats......",1.5], ["Cats............",1.5], ["am I so different to them after all?", 3.5], ["Cheese....... Cheese I like.",3.5]]
+	0: [["For so long have I watched over the critters of the forest... so so long", 4.5], ["All they do is eat..... All day long they feast on cheese and steak", 4], ["Is this right? Does the food hurt? Who watches over cheese?", 4], ["Was I wrong all this time? Food needs protecting...not critters", 4], ["Thats it! I will use the sacred powers of the SPACE BAR to protect all food.", 4], ["I..... I MUST PROTECT CHEESE..................", 2], [".....................with the SPACE BAR!", 2]],
+	1: [["It seems I was right... The cheese was rescued by a power even mightier than I!", 4], ["I see the signs and accept this mission. I will protect the foods of the forest!",3.5], ["No critter can stop me!", 1.25], ["Well..... as long as there is only one!",2]]
 }
 
 var current_level_index = -1
 
 func start_game():
-	current_level_index = -1
-	load_next_level()
-	get_tree().change_scene("res://levels/%s" % levels[current_level_index])
+	current_level_index = 0
+	load_dialogue_scene()
 
 func load_next_level():
 	current_level_index += 1

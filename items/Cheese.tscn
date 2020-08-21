@@ -31,7 +31,7 @@ hframes = 48
 frame = 802
 
 [node name="Stats" parent="." instance=ExtResource( 2 )]
-max_health = 2
+max_health = 3
 nav_alias = "Cheese"
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]

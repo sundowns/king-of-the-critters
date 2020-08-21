@@ -82,3 +82,6 @@ func is_goal_node(body):
 		return false
 	var stats = body.get_node('Stats')
 	return goal_node_names.has(stats.nav_alias)
+
+func force_stop():
+	set_process(false)

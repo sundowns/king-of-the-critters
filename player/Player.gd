@@ -9,6 +9,11 @@ enum PlayerState {
 	CONTROLLING
 }
 
+const critter_movespeed_modifiers = {
+	"Cat": 0.85,
+	"Rat": 1.0,
+	"Crocodile": 0.4
+}
 const critter_scene_path_format = "res://critters/{str}.tscn"
 const sprite_walk_rotation = 4
 # insane hack.... tile atlas seems to be kind of terrible
@@ -72,7 +77,7 @@ func move_crown_state(delta, input_vector):
 func move_controlled_state(delta, input_vector):
 	var critter_sprite = get_node("CritterSprite")
 	critter_sprite.visible = true
-	player_movement(delta, input_vector)
+	player_movement(delta, input_vector, critter_movespeed_modifiers[current_critter_type])
 	move()
 	rotate_critter_sprite(critter_sprite, input_vector)
 	if Input.is_action_just_pressed("ui_accept"):
@@ -86,9 +91,9 @@ func rotate_critter_sprite(critter_sprite, input_vector):
 	else:
 		critter_sprite.rotation_degrees = 0
 
-func player_movement(delta, input_vector):
+func player_movement(delta, input_vector, modifier = 1.0):
 	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+		velocity = velocity.move_toward(input_vector * MAX_SPEED * modifier, ACCELERATION * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta) 
 
@@ -155,6 +160,7 @@ func release_target():
 	# Spawn our critter back
 	var new_critter = load(critter_scene_path_format.format({"str": current_critter_type})).instance()
 	new_critter.global_position = global_position
+	
 	get_parent().add_child(new_critter)
 	# seems like this has to be done after adding as a child or stat values dont get set (cause its onready probably?)
 	new_critter.get_node("Stats").set_health(current_critter_health)
@@ -169,3 +175,4 @@ func update_control_target(new_target):
 func reset_control_target():
 	control_target.set_is_targetted(false)
 	control_target = null
+	
