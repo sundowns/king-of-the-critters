@@ -2,7 +2,7 @@ extends Control
 
 onready var animation_player = $Crown/AnimationPlayer
 onready var dialogue_box = $DialogueBox/RichTextLabel
-onready var tween = $DialogueBox/Tween
+onready var tween: Tween = $DialogueBox/Tween
 onready var timer = $Timer
 onready var finish_prompt = $FinishPrompt
 onready var next_prompt = $NextPrompt
@@ -34,6 +34,10 @@ func _process(delta):
 			if Input.is_action_just_pressed("ui_accept"):
 				dialogue_index += 1
 				prepare_text()
+	else:
+		if Input.is_action_just_pressed("ui_accept"):
+			tween.stop_all()
+			dialogue_box.percent_visible = 1
 
 func set_dialogue(new_value):
 	dialogue = new_value
