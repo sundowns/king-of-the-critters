@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/Menu.gd" type="Script" id=1]
 [ext_resource path="res://art/kenny1bit_3.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://UI/game_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://player/Crown.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.00384615, 0.711538, 0.974265 )
-colors = PoolColorArray( 0.141176, 0.109804, 0.12549, 1, 0.278431, 0.176471, 0.235294, 1, 0.916742, 0.904977, 0.911765, 1 )
+offsets = PoolRealArray( 0.11875, 0.54375, 0.8625, 0.974265 )
+colors = PoolColorArray( 0.141176, 0.109804, 0.12549, 1, 0.278431, 0.176471, 0.235294, 1, 0.519531, 0.497208, 0.510087, 1, 0.916742, 0.904977, 0.911765, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
@@ -23,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -31,15 +33,18 @@ position = Vector2( 159.087, 90.3785 )
 rotation = 1.5708
 scale = Vector2( 1.84757, 321.674 )
 texture = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayButton" type="Button" parent="."]
-margin_left = 110.0
-margin_top = 100.0
-margin_right = 226.0
-margin_bottom = 134.0
+margin_left = 48.0
+margin_top = 80.0
+margin_right = 164.0
+margin_bottom = 114.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.184314, 0.184314, 0.184314, 1 )
+custom_colors/font_color_hover = Color( 0.392157, 0.392157, 0.392157, 1 )
 shortcut_in_tooltip = false
 text = "play"
 flat = true
@@ -58,4 +63,14 @@ text = "king of the critters"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Crown" parent="." instance=ExtResource( 4 )]
+position = Vector2( 240, 80 )
+scale = Vector2( 2, 2 )
+offset = Vector2( 0, 0.465527 )
+
+[node name="Shadow" parent="Crown" index="0"]
+scale = Vector2( 0.988362, 0.588362 )
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+
+[editable path="Crown"]
