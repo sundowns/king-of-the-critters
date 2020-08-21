@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.354167, 1 )
+colors = PoolColorArray( 1, 0.72549, 0, 1, 1, 0.973011, 0.902344, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+direction = Vector3( 1, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 15.0
+initial_velocity_random = 1.0
+angular_velocity = 180.0
+orbit_velocity = 0.2
+orbit_velocity_random = 0.2
+linear_accel = 10.0
+scale = 2.0
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+
+[node name="AttachCritterParticles" type="Particles2D"]
+emitting = false
+amount = 15
+lifetime = 0.5
+one_shot = true
+speed_scale = 3.0
+process_material = SubResource( 3 )

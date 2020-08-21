@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://art/Tilesheet/colored_transparent_recoloured.png" type="Texture" id=1]
 [ext_resource path="res://critters/Stats.tscn" type="PackedScene" id=2]
@@ -13,6 +13,15 @@ height = 5.45664
 radius = 3.86047
 height = 5.25801
 
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "Saved"
+
 [node name="Cheese" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 5
@@ -20,6 +29,7 @@ script = ExtResource( 3 )
 KNOCKBACK_FRICTION = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -35,11 +45,18 @@ max_health = 3
 nav_alias = "Cheese"
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+visible = false
 collision_layer = 16384
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+process_material = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Saved = SubResource( 3 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]

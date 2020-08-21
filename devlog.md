@@ -57,3 +57,13 @@
 - Thanks for playing scene
 - Dialogue scene
 - ~4.5
+
+## Day 7
+
+- Dialogue scene improvements (takes an array of text now, prompts for next line)
+- As per NyuuHaffu#6190 suggestion, added the ability to skip text readout with input!
+- First two tutorial levels
+- Intro dialogue scenes
+- Variable speed when controlling different critters
+- Tractor beam animation WIP
+- ~2.5 hours
