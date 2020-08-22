@@ -7,7 +7,9 @@ export var time_allowed = 1
 
 var cheese_count: int = 0
 var meat_count: int = 0
-var critter_count: int = 0
+var rat_count: int = 0
+var cat_count: int = 0
+var crocodile_count: int = 0
 var is_entity_counts_dirty = true
 var tick_timer = 0
 var player_won = false
@@ -16,7 +18,7 @@ var is_paused = false
 
 const TICK_DURATION = 1 # 1 second
 
-signal counts_changed(cheese_count, meat_count, critter_count)
+signal counts_changed(cheese_count, meat_count)
 signal goals_set(cheese_enabled, meat_enabled, timer_enabled)
 signal time_left_updated(time_left)
 signal level_complete
@@ -78,7 +80,9 @@ func pause_all_entities():
 func count_entities():
 	cheese_count = 0
 	meat_count = 0
-	critter_count = 0
+	rat_count = 0
+	cat_count = 0
+	crocodile_count = 0
 	for node in entity_list.get_children():
 		if not node.has_node("Stats"):
 			continue
@@ -88,9 +92,13 @@ func count_entities():
 				cheese_count += 1
 			'Meat':
 				meat_count += 1
-			'Rat','Cat','Crocodile':
-				critter_count += 1
-	emit_signal("counts_changed", cheese_count, meat_count, critter_count)
+			'Rat':
+				rat_count += 1
+			'Cat':
+				cat_count += 1
+			'Crocodile':
+				crocodile_count += 1
+	emit_signal("counts_changed", cheese_count, meat_count)
 
 func evaluate_end_conditions():
 	check_for_level_loss()
@@ -103,16 +111,15 @@ func check_for_level_loss():
 	if meat_enabled:
 		food_count += meat_count
 	if food_count <= 0:
-#		print("Defeat - food sources depleted :c")
 		player_lost = true
 
 func check_for_level_win():
-	if critter_count <= 0:
-#		print("Victory! - critters got owned")
-		player_won = true
 	if timer_enabled and level_timer.time_left <= 0:
-#		print("Victory! - food sources protected")
 		player_won = true
+	
+	if cheese_enabled and not meat_enabled:
+		if rat_count <= 0:
+			player_won = true
 
 func on_entity_removal():
 	is_entity_counts_dirty = true

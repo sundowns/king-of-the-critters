@@ -70,12 +70,19 @@ func _on_Navigation_body_exited(body: Node):
 		path = PoolVector2Array()
 		var previous_target = current_target
 		current_target = null
+		var closest = null
+		var closest_distance = 10000
 		for other_body in get_overlapping_bodies():
 			if is_goal_node(other_body) and other_body.get_instance_id() != previous_target.get_instance_id():
-				current_target = other_body
-				parent.state = 'CHASE'
-				return
-		parent.state = 'IDLE'
+				var distance_to_body = other_body.global_position.distance_to(parent.global_position)
+				if distance_to_body < closest_distance:
+					closest = other_body
+					closest_distance = distance_to_body
+		if closest:
+			current_target = closest
+			parent.state = 'CHASE'
+		else:
+			parent.state = 'IDLE'
 
 func is_goal_node(body):
 	if not body.has_node('Stats'):

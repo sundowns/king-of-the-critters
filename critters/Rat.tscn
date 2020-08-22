@@ -8,8 +8,8 @@
 [ext_resource path="res://critters/CritterAttack.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.15145
-height = 1.33007
+radius = 2.53628
+height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 250.0

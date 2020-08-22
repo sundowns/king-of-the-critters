@@ -11,7 +11,6 @@ onready var timer_container: Container = $Container/TimeControl
 
 var cheese_count = 0
 var meat_count = 0
-var critter_count = 0
 var time_count = 0
 
 func _ready():
@@ -25,10 +24,9 @@ func set_flags(cheese_enabled, meat_enabled, time_enabled):
 	meat_container.visible = meat_enabled
 	timer_container.visible = time_enabled
 
-func set_counts(new_cheese_count, new_meat_count, new_critter_count):
+func set_counts(new_cheese_count, new_meat_count):
 	cheese_count = max(new_cheese_count, 0)
 	meat_count = max(new_meat_count, 0)
-	critter_count = max(new_critter_count, 0)
 	update_labels()
 
 func set_time(time):

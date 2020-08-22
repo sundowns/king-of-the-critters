@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-MAX_SPEED = 90
+MAX_SPEED = 100
 
 [node name="CritterDetectionZone" type="Area2D" parent="."]
 collision_layer = 0

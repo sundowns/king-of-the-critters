@@ -32,7 +32,7 @@ tile_data = PoolIntArray( 65535, 0, 196610, 0, 0, 65537, 1, 0, 65537, 2, 0, 6553
 [node name="YSort" type="YSort" parent="Level"]
 
 [node name="Rat" parent="Level/YSort" instance=ExtResource( 7 )]
-position = Vector2( 56, 144 )
+position = Vector2( 272, 168 )
 
 [node name="Rat4" parent="Level/YSort" instance=ExtResource( 7 )]
 position = Vector2( 264, 32 )
@@ -44,7 +44,7 @@ position = Vector2( 152, 104 )
 position = Vector2( 128, 136 )
 
 [node name="Cheese2" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 144, 64 )
+position = Vector2( 136, 56 )
 
 [node name="Rat2" parent="Level/YSort" instance=ExtResource( 7 )]
 position = Vector2( 280, 120 )
