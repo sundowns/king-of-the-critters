@@ -79,11 +79,12 @@ func chase_state(delta):
 			closest = attack_target
 			closest_target_distance = global_position.distance_to(attack_target.global_position)
 		for attackable in critter_attack.get_overlapping_areas():
-			if not navigation.is_goal_node(attackable.get_parent()):
+			var attackable_owner = attackable.get_parent()
+			if not navigation.is_goal_node(attackable_owner):
 				continue
 			if attack_target:
-				var distance_to = global_position.distance_to(attackable.get_parent().global_position)
-				if distance_to < closest_target_distance:
+				var distance_to = global_position.distance_to(attackable_owner.global_position)
+				if distance_to < closest_target_distance and navigation.path_exists(attackable_owner):
 					closest_target_distance = distance_to
 					closest = attackable.get_parent()
 			else:

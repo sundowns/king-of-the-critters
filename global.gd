@@ -20,7 +20,7 @@ var dialogue: Dictionary = {
 	5: [["Maybe not all critters are so bad after all.... ", 2.25], ["Those rats are definitely jerks though", 2], ["Well... and anything that hurts those sweet little cats!", 2.5]],
 	6: [["Rats....Cats......Bears....Oh my!", 2]]
 }
-#7 : [["Is this truly the right path?", 2], ["I judge the critters....but who will judge the food?", 2], [".....Has it always looked that good?", 2]]
+#7 : [["Is this truly the right path?", 2], ["I judge the critters....but who will judge the food?", 2], [".....Wow that cheese actually smells pretty good..", 2]]
 
 var post_game_dialogue = [["............. has cheese always looked so.....", 3], ["Delicious?!", 1]]
 var current_level_index = -1

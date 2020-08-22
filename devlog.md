@@ -67,3 +67,10 @@
 - Variable speed when controlling different critters
 - Tractor beam animation
 - ~5 hours
+
+## Day 8
+
+- Endlessly chasing bugs :c
+- Adding all Music/SFX
+- Levels 3 -> 7
+- ~6 hours

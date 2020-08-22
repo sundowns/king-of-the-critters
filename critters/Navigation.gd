@@ -50,7 +50,7 @@ func set_path_to_target():
 	set_path(nav_map.get_simple_path(parent.global_position, current_target.global_position, false))
 
 func path_exists(path_target):
-	var possible_path = nav_map.get_simple_path(parent.global_position, current_target.global_position, false)
+	var possible_path = nav_map.get_simple_path(parent.global_position, path_target.global_position, false)
 	return possible_path.size() > 0
 
 func _on_Navigation_body_entered(body: Node):
@@ -80,7 +80,7 @@ func _on_Navigation_body_exited(body: Node):
 		for other_body in get_overlapping_bodies():
 			if is_goal_node(other_body) and other_body.get_instance_id() != previous_target.get_instance_id():
 				var distance_to_body = other_body.global_position.distance_to(parent.global_position)
-				if distance_to_body < closest_distance:
+				if distance_to_body < closest_distance and path_exists(other_body):
 					closest = other_body
 					closest_distance = distance_to_body
 		if closest:
