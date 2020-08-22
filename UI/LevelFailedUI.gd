@@ -11,6 +11,7 @@ func _ready():
 	set_process(false)
 
 func show():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	visible = true
 	set_process(true)
 	

@@ -30,6 +30,7 @@ onready var level_timer: Timer = $Level/LevelTimer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(!timer_enabled or time_allowed > 0, "Level has a timer but no value provided :c")
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	connect("level_complete", $GameUI/LevelCompleteUI, "show")
 	connect("level_complete", $GameUI/PauseUI, "freeze")
 	connect("level_failed", $GameUI/LevelFailedUI, "show")

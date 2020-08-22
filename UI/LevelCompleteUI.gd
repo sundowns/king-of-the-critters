@@ -14,6 +14,7 @@ func show():
 	if Global.current_level_index == Global.levels.size() - 1:
 		emit_signal("next_level")
 	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		visible = true
 		set_process(true)
 

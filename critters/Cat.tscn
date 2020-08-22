@@ -47,7 +47,7 @@ nav_alias = "Cat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
 visible = false
-speed = 22.0
+speed = 25.0
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
 shape = SubResource( 2 )

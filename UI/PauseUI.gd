@@ -17,10 +17,12 @@ func _process(delta):
 			pause(tree)
 
 func pause(tree):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	tree.paused = true
 	button.visible = true
 
 func unpause(tree):
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	tree.paused = false
 	button.visible = false
 

@@ -14,6 +14,7 @@ signal dialogue_scene_finished
 
 func _ready():
 	connect("dialogue_scene_finished", Global, "dialogue_finished")
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	finish_prompt.visible = false
 	next_prompt.visible = false
 	get_tree().paused = false
