@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Mizzjam"
+config/name="King of the Critters"
 run/main_scene="res://UI/Menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://art/ui/cheese.png"
 
 [autoload]
 

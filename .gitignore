@@ -3,7 +3,9 @@
 .import/
 export.cfg
 export_presets.cfg
-build/
+build/windows/*
+build/mac/*
+build/linux/*
 
 # Mono-specific ignores
 .mono/
