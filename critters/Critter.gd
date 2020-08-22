@@ -72,13 +72,24 @@ func chase_state(delta):
 		
 	attack_from_chase_timer -= delta
 	if attack_from_chase_timer <= 0:
+		var closest_target_distance = 1000000
+		var closest = attack_target
+		if attack_target:
+			closest_target_distance = global_position.distance_to(attack_target.global_position)
 		for attackable in critter_attack.get_overlapping_areas():
 			if attack_target:
-				if attack_target.get_instance_id() == attackable.get_parent().get_instance_id():
-					hunt_new_target(attackable.get_parent())
+				var distance_to = global_position.distance_to(attackable.get_parent().global_position)
+				if distance_to < closest_target_distance:
+					closest_target_distance = distance_to
+					closest = attackable.get_parent()
 			else:
+				closest = null
 				hunt_new_target(attackable.get_parent())
 			break
+		
+		if closest:
+			hunt_new_target(closest)
+		
 
 func set_state(new_state):
 	# This is only used when some external code sets this
