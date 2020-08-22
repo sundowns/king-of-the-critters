@@ -14,7 +14,7 @@ radius = 6.26011
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 300.0
+radius = 200.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 12.7918
@@ -49,6 +49,7 @@ max_health = 5
 nav_alias = "Crocodile"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
+visible = false
 speed = 10.0
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
@@ -72,6 +73,7 @@ volume_db = -1.0
 
 [node name="SpottedSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+volume_db = -3.0
 [connection signal="attack_animation_ended" from="CritterSprite" to="." method="_on_CritterSprite_attack_animation_ended"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 

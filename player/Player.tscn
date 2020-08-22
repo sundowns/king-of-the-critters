@@ -46,11 +46,11 @@ disabled = true
 
 [node name="DoorOpenSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
-volume_db = -3.0
+volume_db = -5.0
 
 [node name="DoorCloseSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-volume_db = -1.0
+volume_db = -3.0
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )

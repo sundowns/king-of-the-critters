@@ -42,12 +42,16 @@ func move_along_path(delta: float):
 		path.remove(0)
 
 func set_path(value: PoolVector2Array):
-	path = value
 	if value.size() == 0:
 		return
+	path = value
 
 func set_path_to_target():
 	set_path(nav_map.get_simple_path(parent.global_position, current_target.global_position, false))
+
+func path_exists(path_target):
+	var possible_path = nav_map.get_simple_path(parent.global_position, current_target.global_position, false)
+	return possible_path.size() > 0
 
 func _on_Navigation_body_entered(body: Node):
 	if not is_goal_node(body):
@@ -58,8 +62,9 @@ func _on_Navigation_body_entered(body: Node):
 	if current_target and current_target.get_instance_id() != body.get_instance_id():
 		# check which is closer and use that one
 		if body.global_position.distance_to(parent.global_position) < current_target.global_position.distance_to(parent.global_position):
-			current_target = body
-			parent.state = 'CHASE'
+			if path_exists(body):
+				current_target = body
+				parent.state = 'CHASE'
 
 func _on_Navigation_body_exited(body: Node):
 	if not current_target:
