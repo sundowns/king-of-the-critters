@@ -18,7 +18,6 @@ onready var critter_attack = $CritterAttack
 onready var attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
 onready var hit_effect_scene = preload("res://effects/HitEffect.tscn")
 onready var attack_sound: AudioStreamPlayer2D = $AttackSound
-onready var alert_sound: AudioStreamPlayer2D = $AlertSound
 
 signal critter_removed
 

@@ -6,7 +6,7 @@
 [ext_resource path="res://critters/Navigation.tscn" type="PackedScene" id=4]
 [ext_resource path="res://critters/Hurtbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://critters/CritterAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://sfx/cat_attack.wav" type="AudioStream" id=7]
+[ext_resource path="res://sfx/mouse_attack.wav" type="AudioStream" id=7]
 [ext_resource path="res://sfx/spotted.wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -39,7 +39,6 @@ scale = Vector2( 0.7, 0.7 )
 position = Vector2( 4, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
@@ -48,7 +47,6 @@ max_health = 2
 nav_alias = "Rat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
-visible = false
 speed = 18.0
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
@@ -61,7 +59,6 @@ collision_mask = 16384
 shape = SubResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
-visible = false
 collision_layer = 4096
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -69,6 +66,7 @@ shape = SubResource( 4 )
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+volume_db = 4.0
 
 [node name="SpottedSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )

@@ -48,7 +48,6 @@ max_health = 3
 nav_alias = "Cat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
-visible = false
 speed = 25.0
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
