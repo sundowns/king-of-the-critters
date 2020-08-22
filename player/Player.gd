@@ -36,6 +36,10 @@ onready var particle_emitter: Particles2D = $AttachCritterParticles
 onready var camera_transform: RemoteTransform2D = $CameraTransform2D
 onready var tile_map: TileMap = get_tree().current_scene.find_node("TileAtlasWithBackground")
 
+onready var door_open_sound: AudioStreamPlayer2D = $DoorOpenSound
+onready var door_closed_sound: AudioStreamPlayer2D = $DoorCloseSound
+onready var pickup_sound: AudioStreamPlayer2D = $PickupSound
+
 signal entity_released
 
 func _ready():
@@ -129,8 +133,10 @@ func detect_doors():
 			# if input pressed, swap it to the other index (closed vs open)
 			if Input.is_action_just_pressed("ui_accept"):
 				if cell_id == OPEN_DOOR_CELL_ID:
+					door_closed_sound.play()
 					tile_map.set_cellv(player_tilemap_pos, CLOSED_DOOR_CELL_ID)
 				elif cell_id == CLOSED_DOOR_CELL_ID:
+					door_open_sound.play()
 					tile_map.set_cellv(player_tilemap_pos, OPEN_DOOR_CELL_ID)
 		else: 
 			is_highlighting_door = false
@@ -138,6 +144,7 @@ func detect_doors():
 
 func assume_control_of_target():
 	particle_emitter.restart()
+	pickup_sound.play()
 	crown_sprite.visible = false
 	var critter_sprite = control_target.get_node("CritterSprite").duplicate()
 	critter_sprite.material = null
