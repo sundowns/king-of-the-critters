@@ -54,7 +54,7 @@ position = Vector2( 120, 112 )
 position = Vector2( 208, 80 )
 
 [node name="Meat" parent="Level/YSort" instance=ExtResource( 8 )]
-position = Vector2( 160, 72 )
+position = Vector2( 160, 64 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 99.8814, 69.4745 )

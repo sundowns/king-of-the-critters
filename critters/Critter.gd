@@ -16,7 +16,9 @@ onready var navigation = $Navigation
 onready var stats = $Stats
 onready var critter_attack = $CritterAttack
 onready var attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
-onready var hit_effect_scene = preload("res://effects/HitEffect.tscn") #TODO: other hit effects
+onready var hit_effect_scene = preload("res://effects/HitEffect.tscn")
+onready var attack_sound: AudioStreamPlayer2D = $AttackSound
+onready var alert_sound: AudioStreamPlayer2D = $AlertSound
 
 signal critter_removed
 
@@ -97,6 +99,7 @@ func set_state(new_state):
 	state = CritterState[new_state]
 	if state == CritterState.CHASE:
 		create_alert()
+		$SpottedSound.play()
 	elif state == CritterState.IDLE:
 		create_question_mark() 
 
@@ -132,7 +135,8 @@ func player_assumed_control():
 
 func attack_current_target():
 	if attack_target:
-		animation_player.play("Attack")
+		if global_position.distance_to(attack_target.global_position) <= $CritterAttack/CollisionShape2D.shape.radius:
+			animation_player.play("Attack")
 
 func on_hit(damage, knockback_vector):
 	stats.take_damage(damage)
@@ -148,6 +152,7 @@ func reset_chase_attack_timer():
 func _on_CritterSprite_attack_animation_ended():
 	if not attack_target:
 		return
+	attack_sound.play()
 	create_hit_effect(attack_target)
 	var knockback_vector = global_position.direction_to(attack_target.global_position)
 	attack_target.on_hit(critter_attack.damage, knockback_vector * KNOCKBACK_FORCE)

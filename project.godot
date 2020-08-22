@@ -21,7 +21,7 @@ config/icon="res://art/ui/cheese.png"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://Global.tscn"
 
 [display]
 

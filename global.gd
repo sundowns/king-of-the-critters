@@ -1,5 +1,7 @@
 extends Node
 
+onready var music: AudioStreamPlayer = $Music
+
 var levels: Array = [
 	"tutorial1.tscn",
 	"tutorial2.tscn",
@@ -25,6 +27,7 @@ func _ready():
 
 func start_game():
 	current_level_index = 0
+	music.play()
 	load_dialogue_scene()
 
 func load_next_level():
