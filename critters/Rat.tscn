@@ -8,7 +8,7 @@
 [ext_resource path="res://critters/CritterAttack.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 2.53628
+radius = 1.87415
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
@@ -18,7 +18,7 @@ radius = 250.0
 radius = 7.12133
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 5.99687
+radius = 7.65596
 
 [node name="Rat" type="KinematicBody2D"]
 collision_layer = 2147483652
@@ -59,7 +59,6 @@ collision_mask = 16384
 shape = SubResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
-visible = false
 collision_layer = 4096
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]

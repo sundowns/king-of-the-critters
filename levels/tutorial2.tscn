@@ -40,7 +40,7 @@ position = Vector2( 168, 99.3036 )
 position = Vector2( 100, 100.247 )
 
 [node name="Rat2" parent="Level/YSort" instance=ExtResource( 7 )]
-position = Vector2( 248.294, 120.17 )
+position = Vector2( 241.294, 119.92 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 99.8814, 69.4745 )
