@@ -39,6 +39,8 @@ func load_next_level():
 		if dialogue.has(current_level_index):
 			load_dialogue_scene()
 		else: 
+			# need this unpause or scenes with no dialogue can start paused
+			get_tree().paused = false
 			get_tree().change_scene("res://levels/%s" % levels[current_level_index])
 		
 

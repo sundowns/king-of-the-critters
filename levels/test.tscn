@@ -13,6 +13,7 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
+time_allowed = 120
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -35,19 +36,16 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 position = Vector2( 180.418, 109.588 )
 
 [node name="Rat2" parent="Level/YSort" instance=ExtResource( 7 )]
-position = Vector2( 279.288, 129.382 )
+position = Vector2( 184.164, 143.871 )
 
 [node name="Rat" parent="Level/YSort" instance=ExtResource( 7 )]
-position = Vector2( 283.644, 96.14 )
-
-[node name="Crocodile" parent="Level/YSort" instance=ExtResource( 5 )]
-position = Vector2( 91.258, 135.001 )
+position = Vector2( 194.82, 138.347 )
 
 [node name="Player" parent="Level/YSort" instance=ExtResource( 6 )]
 position = Vector2( 99.8814, 69.4745 )
 
 [node name="Meat" parent="Level/YSort" instance=ExtResource( 8 )]
-position = Vector2( 103.082, 39.453 )
+position = Vector2( 103.082, 36.9331 )
 
 [node name="Cheese" parent="Level/YSort" instance=ExtResource( 9 )]
 position = Vector2( 265.309, 140.433 )
@@ -56,7 +54,7 @@ position = Vector2( 265.309, 140.433 )
 position = Vector2( 87.6031, 39.648 )
 
 [node name="Cheese2" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 156.645, 133.407 )
+position = Vector2( 104.673, 43.6376 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 99.8814, 69.4745 )
