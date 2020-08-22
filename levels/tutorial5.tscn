@@ -41,13 +41,10 @@ position = Vector2( 120, 120 )
 position = Vector2( 176, 112 )
 
 [node name="Cheese" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 104, 152 )
+position = Vector2( 88, 152 )
 
 [node name="Cheese2" parent="Level/YSort" instance=ExtResource( 9 )]
 position = Vector2( 200, 120 )
-
-[node name="Cheese3" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 104, 56 )
 
 [node name="Rat2" parent="Level/YSort" instance=ExtResource( 7 )]
 position = Vector2( 280, 120 )

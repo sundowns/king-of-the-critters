@@ -40,12 +40,6 @@ func _ready():
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, KNOCKBACK_FRICTION * delta)
 	knockback = move_and_slide(knockback)
-
-func _process(delta):
-	if outlined:
-		sprite.material = shader_material
-	else:
-		sprite.material = null
 	
 	match state:
 		CritterState.CHASE:
@@ -57,6 +51,12 @@ func _process(delta):
 		CritterState.ATTACK:
 			attack_state(delta)
 			return
+
+func _process(delta):
+	if outlined:
+		sprite.material = shader_material
+	else:
+		sprite.material = null
 
 func idle_state(_delta):
 	animation_player.play("Idle")
@@ -73,20 +73,21 @@ func chase_state(delta):
 	attack_from_chase_timer -= delta
 	if attack_from_chase_timer <= 0:
 		var closest_target_distance = 1000000
-		var closest = attack_target
+		var closest = null
 		if attack_target:
+			closest = attack_target
 			closest_target_distance = global_position.distance_to(attack_target.global_position)
 		for attackable in critter_attack.get_overlapping_areas():
+			if not navigation.is_goal_node(attackable.get_parent()):
+				continue
 			if attack_target:
 				var distance_to = global_position.distance_to(attackable.get_parent().global_position)
 				if distance_to < closest_target_distance:
 					closest_target_distance = distance_to
 					closest = attackable.get_parent()
 			else:
-				closest = null
-				hunt_new_target(attackable.get_parent())
-			break
-		
+				closest = attackable.get_parent()
+				break
 		if closest:
 			hunt_new_target(closest)
 		
@@ -130,7 +131,8 @@ func player_assumed_control():
 	queue_free()
 
 func attack_current_target():
-	animation_player.play("Attack")
+	if attack_target:
+		animation_player.play("Attack")
 
 func on_hit(damage, knockback_vector):
 	stats.take_damage(damage)

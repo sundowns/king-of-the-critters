@@ -36,12 +36,15 @@ onready var particle_emitter: Particles2D = $AttachCritterParticles
 onready var camera_transform: RemoteTransform2D = $CameraTransform2D
 onready var tile_map: TileMap = get_tree().current_scene.find_node("TileAtlasWithBackground")
 
+signal entity_released
+
 func _ready():
 	# attach our remote transform to the scenes camera if there is one
 	animation_player.play("Move")
 	var camera = get_tree().current_scene.find_node("Camera2D")
 	if camera:
 		camera_transform.remote_path = camera.get_path()
+	connect("entity_released", get_tree().current_scene, "on_entity_release")
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
@@ -164,6 +167,7 @@ func release_target():
 	get_parent().add_child(new_critter)
 	# seems like this has to be done after adding as a child or stat values dont get set (cause its onready probably?)
 	new_critter.get_node("Stats").set_health(current_critter_health)
+	current_critter_type = ""
 	state = PlayerState.CROWN
 
 func update_control_target(new_target):

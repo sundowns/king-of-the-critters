@@ -15,10 +15,10 @@ height = 0.0
 radius = 250.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 7.12133
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 7.65596
+radius = 6.46648
 
 [node name="Rat" type="KinematicBody2D"]
 collision_layer = 2147483652
@@ -52,13 +52,13 @@ speed = 18.0
 shape = SubResource( 2 )
 
 [node name="CritterAttack" parent="." instance=ExtResource( 6 )]
-visible = false
 collision_mask = 16384
 
 [node name="CollisionShape2D" parent="CritterAttack" index="0"]
 shape = SubResource( 3 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+visible = false
 collision_layer = 4096
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]

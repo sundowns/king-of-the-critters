@@ -7,22 +7,22 @@
 [ext_resource path="res://art/ui/meat.png" type="Texture" id=5]
 [ext_resource path="res://effects/ItemEffect.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 3.8125
 height = 3.375
 
-[sub_resource type="CapsuleShape2D" id=8]
-radius = 4.35764
-height = 4.65187
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.89811
+height = 3.41953
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.836879 )
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0.211765 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -34,7 +34,7 @@ orbit_velocity_random = 0.0
 tangential_accel = 100.0
 damping = 50.0
 scale = 0.7
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 4 )
 
 [node name="Meat" type="KinematicBody2D"]
 collision_layer = 8
@@ -45,7 +45,7 @@ KNOCKBACK_FRICTION = 200
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = 1.5708
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
@@ -59,15 +59,14 @@ max_health = 2
 nav_alias = "Meat"
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
-visible = false
 collision_layer = 8192
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 2 )
 
 [node name="ItemEffect" parent="." instance=ExtResource( 6 )]
-process_material = SubResource( 9 )
+process_material = SubResource( 5 )
 texture = ExtResource( 5 )
 
 [node name="Ring" parent="ItemEffect" index="0"]

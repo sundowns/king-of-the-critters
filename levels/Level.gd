@@ -54,7 +54,7 @@ func _process(delta):
 	tick_timer += delta
 	if tick_timer > TICK_DURATION:
 		tick_timer -= TICK_DURATION
-		check_for_level_win()
+		check_for_timer_win()
 		emit_signal("time_left_updated", int(level_timer.time_left))
 		
 	if player_won:
@@ -115,14 +115,20 @@ func check_for_level_loss():
 		player_lost = true
 
 func check_for_level_win():
-	if timer_enabled and level_timer.time_left <= 0:
-		player_won = true
-	
 	if cheese_enabled and not meat_enabled:
 		if rat_count <= 0:
-			player_won = true
+			var player = $Level/YSort.find_node("Player")
+			if player.current_critter_type != "Rat":
+				player_won = true
+
+func check_for_timer_win():
+	if timer_enabled and level_timer.time_left <= 0:
+		player_won = true
 
 func on_entity_removal():
+	is_entity_counts_dirty = true
+
+func on_entity_release():
 	is_entity_counts_dirty = true
 
 func _on_restart_level():
