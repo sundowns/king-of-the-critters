@@ -45,8 +45,8 @@ max_health = 2
 nav_alias = "Rat"
 
 [node name="Navigation" parent="." instance=ExtResource( 4 )]
+visible = false
 speed = 18.0
-hitbox_leniancy = 2
 
 [node name="DetectGoalArea" parent="Navigation" index="0"]
 shape = SubResource( 2 )

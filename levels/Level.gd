@@ -56,7 +56,7 @@ func _process(delta):
 		
 	if player_won:
 		play_item_win_effect()
-		yield(get_tree().create_timer(3.0), "timeout")
+		yield(get_tree().create_timer(2.5), "timeout")
 		emit_signal("level_complete")
 		get_tree().paused = true
 		return

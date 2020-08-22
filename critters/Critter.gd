@@ -101,10 +101,10 @@ func create_alert():
 	add_child(alert, true)
 	
 func create_hit_effect(target: Node2D):
+	if not target:
+		return
 	var hit_effect = hit_effect_scene.instance()
 	add_child(hit_effect)
-	if not hit_effect:
-		return
 	hit_effect.global_position = hit_effect.global_position.move_toward(target.global_position, hit_effect.global_position.distance_to(target.global_position) * 0.75)
 
 func clear_alerts():
@@ -133,6 +133,8 @@ func reset_chase_attack_timer():
 	attack_from_chase_timer = ATTACK_FROM_CHASE_DELAY
 
 func _on_CritterSprite_attack_animation_ended():
+	if not attack_target:
+		return
 	create_hit_effect(attack_target)
 	var knockback_vector = global_position.direction_to(attack_target.global_position)
 	attack_target.on_hit(critter_attack.damage, knockback_vector * KNOCKBACK_FORCE)
