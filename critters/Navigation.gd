@@ -5,7 +5,7 @@ onready var nav_map: Navigation2D = get_tree().current_scene.get_node("Level/Nav
 onready var hitbox: CollisionShape2D = get_parent().get_node("CollisionShape2D")
 
 export var speed: float = 1
-#export var hitbox_leniancy = 3
+export var hitbox_leniancy = 2
 
 var current_target: Node = null
 var goal_node_names: Array setget set_goal_node # Provided by parent
@@ -28,7 +28,7 @@ func move_along_path(delta: float):
 	for _i in range(path.size()):
 		var distance_to_next = start_point.distance_to(path[0])
 		var direction_to_next = start_point.direction_to(path[0])
-		if distance <= distance_to_next and distance >= 0.0:
+		if distance + hitbox_leniancy <= distance_to_next and distance >= 0.0:
 			# move_and_slide uses delta already, just pass speed
 			parent.move_and_slide(direction_to_next * speed)
 			break
@@ -37,7 +37,7 @@ func move_along_path(delta: float):
 			parent.global_position = path[0]
 			set_process(false)
 		# If we didn't run out of distance this frame, move to the next point
-		distance -= (distance_to_next)
+		distance -= (distance_to_next - hitbox_leniancy)
 		start_point = path[0]
 		path.remove(0)
 
