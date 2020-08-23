@@ -35,11 +35,8 @@ tile_data = PoolIntArray( -131050, 0, 262152, -1, 0, 196610, -65536, 0, 196610, 
 [node name="Player" parent="Level/YSort" instance=ExtResource( 6 )]
 position = Vector2( 185.118, 123.099 )
 
-[node name="Cheese" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 84.7582, 46.1391 )
-
 [node name="Cheese2" parent="Level/YSort" instance=ExtResource( 9 )]
-position = Vector2( 195.663, 50.3865 )
+position = Vector2( 136, 56 )
 
 [node name="Cheese3" parent="Level/YSort" instance=ExtResource( 9 )]
 position = Vector2( 291.466, 67.3762 )

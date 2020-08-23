@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sfx/victory.wav" type="AudioStream" id=1]
+[ext_resource path="res://sfx/defeat.wav" type="AudioStream" id=2]
+[ext_resource path="res://levels/LevelWinLossAudio.gd" type="Script" id=3]
+
+[node name="Audio" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Victory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = 3.0
+
+[node name="Defeat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = 4.0
