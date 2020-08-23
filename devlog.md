@@ -74,3 +74,9 @@
 - Adding all Music/SFX
 - Levels 3 -> 7
 - ~6 hours
+
+## Day 9
+
+- Levels 8 & 9
+- Final export
+- 1.5 hours
