@@ -30,7 +30,7 @@ func _ready():
 	dialogue[levels.size()] = post_game_dialogue
 
 func start_game():
-	current_level_index = 7
+	current_level_index = 0
 	music.play()
 	load_dialogue_scene()
 
