@@ -9,7 +9,8 @@ var levels: Array = [
 	"tutorial4.tscn",
 	"tutorial5.tscn",
 	"tutorial6.tscn",
-	"tutorial7.tscn"
+	"tutorial7.tscn",
+	"tutorial8.tscn"
 ]
 
 var dialogue: Dictionary = {
@@ -18,10 +19,9 @@ var dialogue: Dictionary = {
 	2: [["Who is leaving all this cheese out in the open?!",2], ["Why dont they put it somewhere safe inside and... SHUT THE DOOR!!", 2]],
 	3: [["This would be a lot easier if I could just pick up the food...", 2], ["Well the lazy developer didnt put that in... So I am going to need some backup!", 2], ["Cats dont like cheese right?", 2]],
 	5: [["Maybe not all critters are so bad after all.... ", 2.25], ["Those rats are definitely jerks though", 2], ["Well... and anything that hurts those sweet little cats!", 2.5]],
-	6: [["Rats....Cats......Bears....Oh my!", 2]]
+	6: [["Rats....Cats......Bears....Oh my!", 2]],
+	7 : [["..Is this the right path?", 1.25], ["I judge the critters....but who will judge the food?", 2], [".......Wow that cheese actually smells pretty good...", 2.5]]
 }
-#7 : [["Is this truly the right path?", 2], ["I judge the critters....but who will judge the food?", 2], [".....Wow that cheese actually smells pretty good..", 2]]
-
 var post_game_dialogue = [["............. has cheese always looked so.....", 3], ["Delicious?!", 1]]
 var current_level_index = -1
 
