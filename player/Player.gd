@@ -12,7 +12,7 @@ enum PlayerState {
 const critter_movespeed_modifiers = {
 	"Cat": 0.85,
 	"Rat": 1.0,
-	"Crocodile": 0.4
+	"Crocodile": 0.55
 }
 const critter_scene_path_format = "res://critters/{str}.tscn"
 const sprite_walk_rotation = 4
